@@ -1,5 +1,15 @@
 # zhiboapp
 
+
+
+## Goal
+	Expose REST Service based on Spring+Hibernate+PostgreSQL
+
+## Architecture
+	Apache + Tomcat + Spring + Hiberate + PostgreSQL
+## Current status:
+	1. The GET path of REST is OK. (Browser -> Spring -> Hibernate -> PostgreSQL). (2016/10/23)
+	
 ## How to build the code?
 
 1. Get the code from Github
@@ -7,6 +17,10 @@
 3. cd /path/to/zhiboapp
 4. gradle war #This task will build the java code and generate war which can be deployed to servlet container.
 
+## Test Environment configuration:
+
+Download Tomcat and PostgreSQL to your local machine. Check the versions in below sections.
+	
 ## How to test?
 1. gradle war #This task wll generate war to /path/to/zhiboapp/build/libs/zhiboapp.war
 2. Copy that war to <TomcatHome>/webapps/
@@ -29,14 +43,10 @@
 {"statusCode":404,"errorMessage":"Not found account: non_exist_account"}
 ```
 
-## Architecture
-	Apache + Tomcat + Spring + Hiberate + MySQL
-	
 ## Version
-
 * Gradle: 3.1
 * Java: Java8
 * Tomcat: 7.0.72 (https://tomcat.apache.org/download-70.cgi)
 * Spring: 4.3.3  (http://docs.spring.io/spring/docs/4.3.3.RELEASE/)
 * Jackson: 2.8.3
-* MySQL: http://dev.mysql.com/downloads/windows/installer/5.7.html
+* PostgreSQL: 9.3.14 
