@@ -1,9 +1,9 @@
 # zhiboapp
 
-## 项目架构
+## Architecture
 	Apache + Tomcat + Spring + Hiberate + MySQL
 	
-## 版本信息
+## Version
 
 * Gradle: 3.1
 * Java: Java8
