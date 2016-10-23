@@ -1,14 +1,30 @@
-apply plugin: 'java' 
-apply plugin: 'war' 
+apply plugin: 'java'
+apply plugin: 'war'
 //apply plugin: 'jetty' 
 apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
 apply plugin: 'eclipse-wtp'
+ext {
+    springVersion = "4.3.3.RELEASE"
+    jacksonVersion = "2.8.3"
+}
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-  providedCompile 'javax.servlet:servlet-api:2.5'
-  runtime 'javax.servlet:jstl:1.1.2'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonVersion
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: jacksonVersion
+
+
+    compile group: 'org.springframework', name: 'spring-core', version: springVersion
+    compile group: 'org.springframework', name: 'spring-web', version: springVersion
+    compile group: 'org.springframework', name: 'spring-webmvc', version: springVersion
+    compile group: 'org.springframework', name: 'spring-context', version: springVersion
+
+
+    testCompile 'junit:junit:4.12'
+    providedCompile 'javax.servlet:servlet-api:2.5'
+    runtime 'javax.servlet:jstl:1.1.2'
 }
