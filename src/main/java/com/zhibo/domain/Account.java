@@ -1,13 +1,20 @@
 package com.zhibo.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Created by jichao on 2016/10/23.
  */
+
+@Entity
+@Table(name="_account")
 public class Account {
 
     public Account() {
     }
-
 
     public String getName() {
         return name;
@@ -17,7 +24,6 @@ public class Account {
         this.name = name;
     }
 
-    private String name;
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -27,7 +33,7 @@ public class Account {
         this.phoneNumber = phoneNumber;
     }
 
-    private String phoneNumber;
+
 
     public String getId() {
         return id;
@@ -37,5 +43,13 @@ public class Account {
         this.id = id;
     }
 
+    @Column(name="_phoneNumber")
+    private String phoneNumber;
+
+    @Column(name="_name")
+    private String name;
+
+    @Id
+    @Column(name="_id")
     private String id;
 }

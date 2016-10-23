@@ -7,6 +7,12 @@
 3. cd /path/to/zhiboapp
 4. gradle war #This task will build the java code and generate war which can be deployed to servlet container.
 
+## How to test?
+1. gradle war #This task wll generate war to /path/to/zhiboapp/build/libs/zhiboapp.war
+2. Copy that war to <TomcatHome>/webapps/
+3. Start tomcat: cd <TomcatHome>/bin, then ./startup.sh or .\startup.bat
+4. Try access: http://127.0.0.1:8080/zhiboapp/api/account/account_1 using Chrome.
+
 ## Try current implemented function
 
 1. Run gradle tomcatRun  #This task will load the zhibo web app into a embedded tomcat
@@ -33,3 +39,4 @@
 * Tomcat: 7.0.72 (https://tomcat.apache.org/download-70.cgi)
 * Spring: 4.3.3  (http://docs.spring.io/spring/docs/4.3.3.RELEASE/)
 * Jackson: 2.8.3
+* MySQL: http://dev.mysql.com/downloads/windows/installer/5.7.html

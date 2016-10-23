@@ -1,6 +1,8 @@
 package com.zhibo.web.controller;
 
 import com.zhibo.domain.Account;
+import com.zhibo.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class ZhiBoController {
+
+    @Autowired
+    private AccountService accountService;
+
     @RequestMapping(method = RequestMethod.GET, value = "/api/account/{id}")
     public ModelAndView getAccount(
             HttpServletRequest request,
@@ -24,6 +30,18 @@ public class ZhiBoController {
             @PathVariable("id") String idStr
             ) throws Exception {
 
+        Account account = accountService.getAccountById(idStr);
+        if(account != null){
+            return new ModelAndView("defaultView", "account",account);
+        }else{
+            response.setStatus(HttpStatus.NOT_FOUND.value());
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setErrorMessage("Not found account: "+idStr);
+            errorResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
+            return new ModelAndView("defaultView", "error", errorResponse);
+        }
+
+        /*
         Account account = new Account();
         if("account_1".equals(idStr)) {
             account.setId("account_1");
@@ -37,5 +55,6 @@ public class ZhiBoController {
             errorResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
             return new ModelAndView("defaultView", "error", errorResponse);
         }
+        */
     }
 }

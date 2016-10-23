@@ -11,8 +11,9 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="com.zhibo.*"/>
-    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
 
+    <!-- Web Config -->
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
           <property name="defaultViews">
             <list>
@@ -21,6 +22,30 @@
                     <property name="extractValueFromSingleKeyModel" value="true"/>
                 </bean>
             </list>
+        </property>
+    </bean>
+
+    <!-- Data base config -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>
+        <property name="username" value="postgres" />
+        <property name="password" value="123456"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan">
+            <list>
+                <value>com.zhibo.domain</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+            </props>
         </property>
     </bean>
 
