@@ -1,7 +1,6 @@
-package com.zhibo.web.controller;
+package com.zhibo.features.account;
 
-import com.zhibo.domain.Account;
-import com.zhibo.service.AccountService;
+import com.zhibo.infra.ErrorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 @Controller
-public class ZhiBoController {
+public class AccountController {
 
     @Autowired
     private AccountService accountService;

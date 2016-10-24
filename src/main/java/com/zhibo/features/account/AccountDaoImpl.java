@@ -1,6 +1,5 @@
-package com.zhibo.dao;
+package com.zhibo.features.account;
 
-import com.zhibo.domain.Account;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

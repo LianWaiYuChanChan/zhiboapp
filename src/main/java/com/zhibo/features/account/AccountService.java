@@ -1,6 +1,4 @@
-package com.zhibo.service;
-
-import com.zhibo.domain.Account;
+package com.zhibo.features.account;
 
 /**
  * Created by jichao on 2016/10/23.

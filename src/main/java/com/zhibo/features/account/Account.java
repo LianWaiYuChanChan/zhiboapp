@@ -1,4 +1,4 @@
-package com.zhibo.domain;
+package com.zhibo.features.account;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

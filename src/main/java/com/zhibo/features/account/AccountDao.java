@@ -1,6 +1,5 @@
-package com.zhibo.dao;
+package com.zhibo.features.account;
 
-import com.zhibo.domain.Account;
 
 /**
  * Created by jichao on 2016/10/23.

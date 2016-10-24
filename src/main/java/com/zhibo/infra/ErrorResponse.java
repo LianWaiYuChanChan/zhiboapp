@@ -1,4 +1,4 @@
-package com.zhibo.web.controller;
+package com.zhibo.infra;
 
 /**
  * Created by jichao on 2016/10/23.

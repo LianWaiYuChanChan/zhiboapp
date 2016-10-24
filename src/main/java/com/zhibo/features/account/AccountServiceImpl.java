@@ -1,7 +1,5 @@
-package com.zhibo.service;
+package com.zhibo.features.account;
 
-import com.zhibo.dao.AccountDao;
-import com.zhibo.domain.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

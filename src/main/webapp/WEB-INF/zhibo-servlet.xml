@@ -37,7 +37,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan">
             <list>
-                <value>com.zhibo.domain</value>
+                <value>com.zhibo.features</value>
             </list>
         </property>
         <property name="hibernateProperties">
