@@ -9,7 +9,7 @@
 	Apache + Tomcat + Spring + Hiberate + PostgreSQL
 ## Current status:
 	1. The GET path of REST is OK. (Browser -> Spring -> Hibernate -> PostgreSQL). (2016/10/23)
-	
+	2. THe SET path in in-progress
 ## How to build the code?
 
 1. Get the code from Github
@@ -26,7 +26,14 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 2. Copy that war to <TomcatHome>/webapps/
 3. Start tomcat: cd <TomcatHome>/bin, then ./startup.sh or .\startup.bat
 4. Try access: http://127.0.0.1:8080/zhiboapp/api/account/account_1 using Chrome.
-
+5. Try SET operation (Note: must use REST client and specify header: Accept:application/json and Content-Type: application/json.). Request: POST http://127.0.0.1:8080/zhiboapp/api/account will return below message:
+```json
+    {
+       "phoneNumber": null,
+       "name": null,
+       "id": "account_2"
+    }
+```
 ## Try current implemented function
 
 1. Run gradle tomcatRun  #This task will load the zhibo web app into a embedded tomcat
