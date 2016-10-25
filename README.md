@@ -60,3 +60,4 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 
 ## References
 1. https://dzone.com/articles/building-hateoas-hypermedia
+2. https://opencredo.com/hal-hypermedia-api-spring-hateoas/ (How to test HATEOAS)
