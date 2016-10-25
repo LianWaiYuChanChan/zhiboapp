@@ -1,9 +1,10 @@
 package com.zhibo.features.account;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.zhibo.infra.ResponseObject;
+
+import javax.persistence.*;
+
+import javax.persistence.GenerationType;
 
 /**
  * Created by jichao on 2016/10/23.
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="_account")
-public class Account {
+public class Account implements ResponseObject {
 
     public Account() {
     }
@@ -35,11 +36,11 @@ public class Account {
 
 
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -50,6 +51,11 @@ public class Account {
     private String name;
 
     @Id
-    @Column(name="_id")
-    private String id;
+    @SequenceGenerator(name="_account__id_seq",
+            sequenceName="_account__id_seq",
+            allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator="_account__id_seq")
+    @Column(name = "_id", updatable=false)
+    private Long id;
 }

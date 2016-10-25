@@ -9,7 +9,7 @@
 	Apache + Tomcat + Spring + Hiberate + PostgreSQL
 ## Current status:
 	1. The GET path of REST is OK. (Browser -> Spring -> Hibernate -> PostgreSQL). (2016/10/23)
-	2. THe SET path in in-progress
+	2. The SET path in in-progress: Create Account worked;
 ## How to build the code?
 
 1. Get the code from Github
@@ -31,9 +31,10 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
     {
        "phoneNumber": null,
        "name": null,
-       "id": "account_2"
+       "id": 1
     }
 ```
+
 ## Try current implemented function
 
 1. Run gradle tomcatRun  #This task will load the zhibo web app into a embedded tomcat

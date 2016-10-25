@@ -1,6 +1,9 @@
 package com.zhibo.features.account;
 
 import com.zhibo.infra.ErrorResponse;
+import com.zhibo.infra.ResponseObject;
+import com.zhibo.infra.ZhiBoBaseException;
+import org.hibernate.hql.internal.antlr.HqlSqlTokenTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -25,16 +28,15 @@ public class AccountController {
             HttpServletRequest request,
             HttpServletResponse response,
             @PathVariable("id") String idStr
-            ) throws Exception {
+    ) throws Exception {
 
         Account account = accountService.getAccountById(idStr);
-        if(account != null){
-            return new ModelAndView("defaultView", "account",account);
-        }else{
+        if (account != null) {
+            return new ModelAndView("defaultView", "account", account);
+        } else {
             response.setStatus(HttpStatus.NOT_FOUND.value());
-            ErrorResponse errorResponse = new ErrorResponse();
-            errorResponse.setErrorMessage("Not found account: "+idStr);
-            errorResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
+            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(),
+                    "Not find account : " + idStr);
             return new ModelAndView("defaultView", "error", errorResponse);
         }
     }
@@ -42,17 +44,18 @@ public class AccountController {
     @RequestMapping(
             method = RequestMethod.POST
             , value = "/api/account"
-            , consumes="application/json"
+            , consumes = "application/json"
     )
     @ResponseBody
-    public Account createAccount(
+    public ResponseObject createAccount(
             HttpServletRequest request,
             HttpServletResponse response,
-            @RequestBody AccountCreateRequest createRequest) throws Exception {
-        Account account = new Account();
-        System.err.println(createRequest.getName());
-        account.setId("account_2");
-        return account;
+            @RequestBody AccountCreateRequest createRequest) {
+        try {
+            return accountService.createAccount(createRequest);
+        } catch (ZhiBoBaseException e) {
+            return new ErrorResponse(e);
+        }
     }
 
 }

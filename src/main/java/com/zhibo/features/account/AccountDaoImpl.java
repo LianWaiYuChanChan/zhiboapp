@@ -1,9 +1,13 @@
 package com.zhibo.features.account;
 
+import com.zhibo.infra.InternalErrorException;
+import com.zhibo.infra.ZhiBoBaseException;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -35,4 +39,20 @@ public class AccountDaoImpl implements AccountDao {
         }
         return null;
     }
+
+    @Override
+    public Account createAccount(Account account) throws ZhiBoBaseException {
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            //session.beginTransaction(); @Transactional on Service should do that work.
+            session.save(account);
+            //session.getTransaction().commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            throw new InternalErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error.");
+        }
+        return account;
+    }
+
 }

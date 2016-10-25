@@ -23,5 +23,12 @@ public class AccountCreateRequest {
     private String name;
     private String phoneNumber;
 
+    public Account toAccount() {
+        final Account account = new Account();
+        account.setName(this.name);
+        account.setPhoneNumber(this.phoneNumber);
+        return account;
+    }
+
 
 }
