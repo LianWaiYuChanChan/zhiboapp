@@ -57,3 +57,6 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 * Spring: 4.3.3  (http://docs.spring.io/spring/docs/4.3.3.RELEASE/)
 * Jackson: 2.8.3
 * PostgreSQL: 9.3.14 
+
+## References
+1. https://dzone.com/articles/building-hateoas-hypermedia
