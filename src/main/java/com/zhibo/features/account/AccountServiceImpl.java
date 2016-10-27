@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by jichao on 2016/10/23.
@@ -16,12 +17,27 @@ public class AccountServiceImpl implements AccountService {
     private AccountDao accountDao;
 
     @Override
-    public Account getAccountById(String id) {
+    public Account getAccountById(String id) throws  ZhiBoBaseException {
         return accountDao.getAccountById(id);
     }
 
     @Override
     public Account createAccount(AccountCreateRequest accountCreateRequest) throws ZhiBoBaseException {
         return accountDao.createAccount(accountCreateRequest.toAccount());
+    }
+
+    @Override
+    public void deleteAccount(String id) throws ZhiBoBaseException {
+        accountDao.deleteAccount(id);
+    }
+
+    @Override
+    public void modifyAccount(String id, AccountModifyRequest accountModifyRequest) throws ZhiBoBaseException {
+        accountDao.modifyAccount(id, accountModifyRequest);
+    }
+
+    @Override
+    public List<Account> getAccounts() throws ZhiBoBaseException {
+        return accountDao.getAccounts();
     }
 }

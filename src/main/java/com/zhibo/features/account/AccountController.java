@@ -1,6 +1,7 @@
 package com.zhibo.features.account;
 
 import com.zhibo.infra.ErrorResponse;
+import com.zhibo.infra.ResourceCollection;
 import com.zhibo.infra.ResponseObject;
 import com.zhibo.infra.ZhiBoBaseException;
 import org.hibernate.hql.internal.antlr.HqlSqlTokenTypes;
@@ -23,21 +24,30 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+    @RequestMapping(method = RequestMethod.GET, value = "/api/account")
+    public Object getAccounts(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) {
+        try {
+            return ResourceCollection.create(accountService.getAccounts());
+        } catch (ZhiBoBaseException e) {
+            response.setStatus(e.getStatusCode().value());
+            return new ErrorResponse(e);
+        }
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/api/account/{id}")
-    public ModelAndView getAccount(
+    public ResponseObject getAccount(
             HttpServletRequest request,
             HttpServletResponse response,
             @PathVariable("id") String idStr
-    ) throws Exception {
-
-        Account account = accountService.getAccountById(idStr);
-        if (account != null) {
-            return new ModelAndView("defaultView", "account", account);
-        } else {
-            response.setStatus(HttpStatus.NOT_FOUND.value());
-            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(),
-                    "Not find account : " + idStr);
-            return new ModelAndView("defaultView", "error", errorResponse);
+    ) {
+        try {
+            return accountService.getAccountById(idStr);
+        } catch (ZhiBoBaseException e) {
+            response.setStatus(e.getStatusCode().value());
+            return new ErrorResponse(e);
         }
     }
 
@@ -54,6 +64,44 @@ public class AccountController {
         try {
             return accountService.createAccount(createRequest);
         } catch (ZhiBoBaseException e) {
+            response.setStatus(e.getStatusCode().value());
+            return new ErrorResponse(e);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE
+            , value = "/api/account/{id}"
+            , consumes = "application/json")
+    @ResponseBody
+    public ResponseObject deleteAccount(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @PathVariable("id") String id) {
+        try {
+            accountService.deleteAccount(id);
+            response.setStatus(HttpStatus.NO_CONTENT.value());
+            return null;
+        } catch (ZhiBoBaseException e) {
+            response.setStatus(e.getStatusCode().value());
+            return new ErrorResponse(e);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.POST
+            , value = "/api/account/{id}"
+            , consumes = "application/json")
+    @ResponseBody
+    public ResponseObject modify(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @PathVariable("id") String id,
+            @RequestBody AccountModifyRequest accountModifyRequest) {
+        try {
+            accountService.modifyAccount(id, accountModifyRequest);
+            response.setStatus(HttpStatus.NO_CONTENT.value());
+            return null;
+        } catch (ZhiBoBaseException e) {
+            response.setStatus(e.getStatusCode().value());
             return new ErrorResponse(e);
         }
     }

@@ -1,6 +1,7 @@
 package com.zhibo.features.account;
 
 import com.zhibo.infra.InternalErrorException;
+import com.zhibo.infra.ResourceNotFoundException;
 import com.zhibo.infra.ZhiBoBaseException;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -22,22 +23,23 @@ public class AccountDaoImpl implements AccountDao {
     private SessionFactory sessionFactory;
 
     @Override
-    public Account getAccountById(String id) {
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
-            Query query = session.createQuery("from Account account where id = '"+id+"'");
-
-            List list = query.list();
-            if(list.size() == 1){
-                return (Account)list.get(0);
-            }
-        }finally {
-            if (session != null) {
-                session.close();
-            }
+    public Account getAccountById(String id) throws ZhiBoBaseException {
+        Session session = sessionFactory.getCurrentSession();
+        try{
+            Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            throw new ResourceNotFoundException("account", id);
         }
-        return null;
+
+        Query query = session.createQuery("from Account account where id = '" + id + "'");
+        List list = query.list();
+        if (list.size() == 1) {
+            return (Account) list.get(0);
+        } else if (list.size() > 1) {
+            throw new InternalErrorException("Get more than one rows for id: " + id);
+        } else {
+            throw new ResourceNotFoundException("account", id);
+        }
     }
 
     @Override
@@ -55,4 +57,36 @@ public class AccountDaoImpl implements AccountDao {
         return account;
     }
 
+    @Override
+    public void deleteAccount(String id) throws ZhiBoBaseException {
+        Session session = sessionFactory.getCurrentSession();
+
+        Account account = getAccountById(id);
+        try {
+            session.delete(account);
+        } catch (Exception e) {
+            throw new InternalErrorException();
+        }
+    }
+
+    @Override
+    public void modifyAccount(String id, AccountModifyRequest accountModifyRequest) throws ZhiBoBaseException{
+        Session session = sessionFactory.getCurrentSession();
+        Account account = getAccountById(id);
+        account.setName(accountModifyRequest.getName());
+        account.setPhoneNumber(accountModifyRequest.getPhoneNumber());
+        try {
+            session.update(account);
+        } catch (Exception e) {
+            throw new InternalErrorException();
+        }
+    }
+
+    @Override
+    public List<Account> getAccounts() throws ZhiBoBaseException {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Account account");
+        List list = query.list();
+        return (List<Account>)list;
+    }
 }
