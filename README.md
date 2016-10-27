@@ -9,7 +9,11 @@
 	Apache + Tomcat + Spring + Hiberate + PostgreSQL
 ## Current status:
 	1. The GET path of REST is OK. (Browser -> Spring -> Hibernate -> PostgreSQL). (2016/10/23)
-	2. The SET path in in-progress: Create Account worked;
+	2. Featurs (CRUD) are supported: collection query, single resource query, create, modify, delete.
+## Backlog:
+1. Paging
+2. HATEOAS
+
 ## How to build the code?
 
 1. Get the code from Github
