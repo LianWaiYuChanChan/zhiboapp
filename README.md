@@ -7,12 +7,15 @@
 
 ## Architecture
 	Apache + Tomcat + Spring + Hiberate + PostgreSQL
+	
 ## Current status:
 	1. The GET path of REST is OK. (Browser -> Spring -> Hibernate -> PostgreSQL). (2016/10/23)
 	2. Featurs (CRUD) are supported: collection query, single resource query, create, modify, delete.
+	
 ## Backlog:
 1. Paging
 2. HATEOAS
+3. Filter, OrderbyBy, count, groupBy.
 
 ## How to build the code?
 
