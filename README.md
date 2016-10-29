@@ -67,6 +67,23 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 * PostgreSQL: 9.3.14 
 
 ## References
+
+### About REST HATEOAS
 1. https://dzone.com/articles/building-hateoas-hypermedia
 2. https://opencredo.com/hal-hypermedia-api-spring-hateoas/ (How to test HATEOAS)
+
+### About test on docker
 3. http://bencane.com/2016/01/11/using-travis-ci-to-test-docker-builds/
+
+### About REST query filter and parser, ANTLR, JavaCC, AST
+1. http://www.andymcm.com/?p=21
+2. http://linqtoquerystring.net/index.html
+3. http://tastefulcode.com/2014/04/04/building-a-query-parser-for-elasticsearch/
+4. https://www.javacodegeeks.com/2012/01/simplifying-restful-search.html
+5. http://specs.okfnlabs.org/research/data-query-protocol/
+6. https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html
+
+### REST Best pratices
+1. http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#advanced-queries
+
+
