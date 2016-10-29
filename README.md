@@ -12,10 +12,16 @@
 	1. The GET path of REST is OK. (Browser -> Spring -> Hibernate -> PostgreSQL). (2016/10/23)
 	2. Featurs (CRUD) are supported: collection query, single resource query, create, modify, delete.
 	
-## Backlog:
+## Backlog
+0. CI setup (0)
 1. Paging
 2. HATEOAS
 3. Filter, OrderbyBy, count, groupBy.
+4. Architecture: RQL + JPA&JPQL (based o hiberate)?
+5. API spec finalize
+6. Security Impl investigation and impl
+7. Interact with Cloud? Should we?
+8. Admin access, UI (WEB and App)?
 
 ## How to build the code?
 
@@ -86,7 +92,7 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 7. http://www.baeldung.com/rest-api-search-language-spring-data-querydsl
 8. https://www.sitepen.com/blog/2010/11/02/resource-query-language-a-query-language-for-the-web-nosql/
 9. https://github.com/jirutka/rsql-parser (Good)
-10.https://github.com/tennaito/rsql-jpa (Query to JPA. Good)
+10. https://github.com/tennaito/rsql-jpa (Query to JPA. Good)
 
 ### REST Best pratices
 1. http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#advanced-queries
