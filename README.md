@@ -85,6 +85,7 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 7. http://www.baeldung.com/rest-api-search-language-spring-data-querydsl
 8. https://www.sitepen.com/blog/2010/11/02/resource-query-language-a-query-language-for-the-web-nosql/
 9. https://github.com/jirutka/rsql-parser (Good)
+10.https://github.com/tennaito/rsql-jpa (Query to JPA. Good)
 
 ### REST Best pratices
 1. http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#advanced-queries
