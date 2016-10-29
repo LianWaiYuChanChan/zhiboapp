@@ -82,6 +82,7 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 4. https://www.javacodegeeks.com/2012/01/simplifying-restful-search.html
 5. http://specs.okfnlabs.org/research/data-query-protocol/
 6. https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html
+7. http://www.baeldung.com/rest-api-search-language-spring-data-querydsl
 
 ### REST Best pratices
 1. http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#advanced-queries
