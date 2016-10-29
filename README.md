@@ -91,4 +91,7 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 ### REST Best pratices
 1. http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#advanced-queries
 
+### Hibernate or JPA
+1. http://cliffmeyers.com/blog/2011/7/18/why-i-finally-ditched-hibernate-native-apis-for-jpa.html
+
 
