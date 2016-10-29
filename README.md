@@ -63,6 +63,7 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 * Java: Java8
 * Tomcat: 7.0.72 (https://tomcat.apache.org/download-70.cgi)
 * Spring: 4.3.3  (http://docs.spring.io/spring/docs/4.3.3.RELEASE/)
+* Hibenate: 4.3.5 (More details: build.gradle)
 * Jackson: 2.8.3
 * PostgreSQL: 9.3.14 
 
