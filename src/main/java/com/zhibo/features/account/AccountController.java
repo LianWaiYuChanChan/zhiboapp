@@ -1,15 +1,10 @@
 package com.zhibo.features.account;
 
-import com.zhibo.infra.ErrorResponse;
-import com.zhibo.infra.ResourceCollection;
-import com.zhibo.infra.ResponseObject;
-import com.zhibo.infra.ZhiBoBaseException;
-import org.hibernate.hql.internal.antlr.HqlSqlTokenTypes;
+import com.zhibo.infra.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class AccountController {
+    private static String CLASS_NAME = "AccountController";
 
     @Autowired
     private AccountService accountService;
@@ -29,6 +25,8 @@ public class AccountController {
             HttpServletRequest request,
             HttpServletResponse response
     ) {
+        final String METHOD_NAME = CLASS_NAME + ".getAccounts -- ";
+        Logger.trace(METHOD_NAME + "Enter.");
         try {
             return ResourceCollection.create(accountService.getAccounts());
         } catch (ZhiBoBaseException e) {

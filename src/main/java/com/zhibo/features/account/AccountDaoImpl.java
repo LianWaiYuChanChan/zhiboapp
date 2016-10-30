@@ -1,6 +1,7 @@
 package com.zhibo.features.account;
 
 import com.zhibo.infra.InternalErrorException;
+import com.zhibo.infra.Logger;
 import com.zhibo.infra.ResourceNotFoundException;
 import com.zhibo.infra.ZhiBoBaseException;
 import org.hibernate.HibernateException;
@@ -25,9 +26,11 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public Account getAccountById(String id) throws ZhiBoBaseException {
         Session session = sessionFactory.getCurrentSession();
-        try{
+        try {
             Long.parseLong(id);
         } catch (NumberFormatException e) {
+            Logger.warn("Invalid account id: " + id + ", as it is not a integer.");
+            Logger.error("Invalid account id. ", e);
             throw new ResourceNotFoundException("account", id);
         }
 
@@ -46,12 +49,9 @@ public class AccountDaoImpl implements AccountDao {
     public Account createAccount(Account account) throws ZhiBoBaseException {
         Session session = sessionFactory.getCurrentSession();
         try {
-            //session.beginTransaction(); @Transactional on Service should do that work.
             session.save(account);
-            //session.getTransaction().commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
+            Logger.error("Internal Error in createAccount.", e);
             throw new InternalErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error.");
         }
         return account;
@@ -65,23 +65,25 @@ public class AccountDaoImpl implements AccountDao {
         try {
             session.delete(account);
         } catch (Exception e) {
+            Logger.error("Internal Error in deleteAccount.", e);
             throw new InternalErrorException();
         }
     }
 
     @Override
-    public void modifyAccount(String id, AccountModifyRequest accountModifyRequest) throws ZhiBoBaseException{
+    public void modifyAccount(String id, AccountModifyRequest accountModifyRequest) throws ZhiBoBaseException {
         Session session = sessionFactory.getCurrentSession();
         Account account = getAccountById(id);
-        if(accountModifyRequest.getName() != null) {
+        if (accountModifyRequest.getName() != null) {
             account.setName(accountModifyRequest.getName());
         }
-        if(accountModifyRequest.getPhoneNumber() != null) {
+        if (accountModifyRequest.getPhoneNumber() != null) {
             account.setPhoneNumber(accountModifyRequest.getPhoneNumber());
         }
         try {
             session.update(account);
         } catch (Exception e) {
+            Logger.error("Internal Error in modifyAccount.", e);
             throw new InternalErrorException();
         }
     }
@@ -91,6 +93,6 @@ public class AccountDaoImpl implements AccountDao {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Account account");
         List list = query.list();
-        return (List<Account>)list;
+        return (List<Account>) list;
     }
 }
