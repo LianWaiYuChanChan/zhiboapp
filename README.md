@@ -1,6 +1,7 @@
 # zhiboapp
 
-
+## CI Status
+* ![Build Status](https://travis-ci.org/LianWaiYuChanChan/zhiboapp.svg?branch=master)
 
 ## Goal
 	Expose REST Service based on Spring+Hibernate+PostgreSQL
