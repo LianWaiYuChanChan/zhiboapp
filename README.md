@@ -1,7 +1,7 @@
 # zhiboapp
 
 ## CI Status
-* ![Build Status](https://travis-ci.org/LianWaiYuChanChan/zhiboapp.svg?branch=master)
+* [![Build Status](https://travis-ci.org/LianWaiYuChanChan/zhiboapp.svg?branch=master)](https://travis-ci.org/LianWaiYuChanChan/zhiboapp)
 * [![codecov.io](https://codecov.io/github/LianWaiYuChanChan/zhiboapp/coverage.svg?branch=master)](https://codecov.io/github/LianWaiYuChanChan/zhiboapp?branch=master)
 
 ## Goal
