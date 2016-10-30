@@ -73,8 +73,12 @@ public class AccountDaoImpl implements AccountDao {
     public void modifyAccount(String id, AccountModifyRequest accountModifyRequest) throws ZhiBoBaseException{
         Session session = sessionFactory.getCurrentSession();
         Account account = getAccountById(id);
-        account.setName(accountModifyRequest.getName());
-        account.setPhoneNumber(accountModifyRequest.getPhoneNumber());
+        if(accountModifyRequest.getName() != null) {
+            account.setName(accountModifyRequest.getName());
+        }
+        if(accountModifyRequest.getPhoneNumber() != null) {
+            account.setPhoneNumber(accountModifyRequest.getPhoneNumber());
+        }
         try {
             session.update(account);
         } catch (Exception e) {

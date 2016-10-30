@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS  _account;
-CREATE TABLE _account (
-    _id SERIAL PRIMARY KEY,
-    _name varchar NOT NULL,
-    _phoneNumber varchar
+DROP TABLE IF EXISTS  account;
+CREATE TABLE account (
+    id SERIAL PRIMARY KEY,
+   name varchar NOT NULL,
+    phoneNumber varchar
 );

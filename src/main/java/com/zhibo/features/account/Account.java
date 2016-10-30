@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
  */
 
 @Entity
-@Table(name="_account")
+@Table(name="account")
 public class Account implements ResponseObject {
 
     public Account() {
@@ -44,18 +44,18 @@ public class Account implements ResponseObject {
         this.id = id;
     }
 
-    @Column(name="_phoneNumber")
+    @Column(name="phoneNumber")
     private String phoneNumber;
 
-    @Column(name="_name")
+    @Column(name="name")
     private String name;
 
     @Id
-    @SequenceGenerator(name="_account__id_seq",
-            sequenceName="_account__id_seq",
+    @SequenceGenerator(name="account_id_seq",
+            sequenceName="account_id_seq",
             allocationSize=1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator="_account__id_seq")
-    @Column(name = "_id", updatable=false)
+            generator="account_id_seq")
+    @Column(name = "id", updatable=false)
     private Long id;
 }

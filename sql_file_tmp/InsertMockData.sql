@@ -1,2 +1,2 @@
-DELETE FROM _account;
-INSERT INTO _account (_name, _phoneNumber) VALUES ('jack', '123456789');
+DELETE FROM account;
+INSERT INTO account (name, phoneNumber) VALUES ('jack', '123456789');

@@ -32,6 +32,11 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-orm', version: springVersion
 
     testCompile 'junit:junit:4.12'
+    testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.3.RELEASE'
+    //Needed by spring test
+    testCompile group: 'com.jayway.jsonpath', name: 'json-path', version: '1.0.0'
+    testCompile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.4'
+
     providedCompile 'javax.servlet:servlet-api:2.5'
     runtime 'javax.servlet:jstl:1.1.2'
 }
@@ -45,3 +50,10 @@ jacocoTestReport {
 
 check.dependsOn jacocoTestReport
 check.dependsOn war
+
+// This copy is let unit test can import the application context xml file.
+task('copyContextConfig', type: Copy) {
+       from(file(webAppDirName + "/WEB-INF/zhibo-servlet.xml"))
+       into('src/main/resources/')
+}
+processResources.dependsOn copyContextConfig
