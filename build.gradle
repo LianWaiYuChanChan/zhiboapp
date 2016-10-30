@@ -44,3 +44,4 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
+check.dependsOn war
