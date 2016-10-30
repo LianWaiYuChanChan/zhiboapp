@@ -2,6 +2,7 @@
 
 ## CI Status
 * ![Build Status](https://travis-ci.org/LianWaiYuChanChan/zhiboapp.svg?branch=master)
+* [![codecov.io](https://codecov.io/github/LianWaiYuChanChan/zhiboapp/coverage.svg?branch=master)](https://codecov.io/github/LianWaiYuChanChan/zhiboapp?branch=master)
 
 ## Goal
 	Expose REST Service based on Spring+Hibernate+PostgreSQL
