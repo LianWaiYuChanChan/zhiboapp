@@ -5,7 +5,9 @@
 
 ## Filter function can work now.
 
-* You can try : http://127.0.0.1:8080/zhiboapp/api/account?filter=id>1 and id<4
+You can try : 
+* http://127.0.0.1:8080/zhiboapp/api/account?filter=id>1 and id<4
+* http://127.0.0.1:8080/zhiboapp/api/account?filter=id=gt=1;id=lt=4
 
 ## CI Status
 * [![Build Status](https://travis-ci.org/LianWaiYuChanChan/zhiboapp.svg?branch=master)](https://travis-ci.org/LianWaiYuChanChan/zhiboapp)
