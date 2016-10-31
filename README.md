@@ -1,4 +1,8 @@
 # zhiboapp
+## Goal of branch zhibo_rsql_jpa
+
+* Use https://github.com/tennaito/rsql-jpa to implement filter function.
+
 
 ## CI Status
 * [![Build Status](https://travis-ci.org/LianWaiYuChanChan/zhiboapp.svg?branch=master)](https://travis-ci.org/LianWaiYuChanChan/zhiboapp)
