@@ -102,4 +102,6 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 ### Hibernate or JPA
 1. http://cliffmeyers.com/blog/2011/7/18/why-i-finally-ditched-hibernate-native-apis-for-jpa.html
 
+### README badge
+* http://shields.io/
 
