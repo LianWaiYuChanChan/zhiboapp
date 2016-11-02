@@ -37,53 +37,38 @@ public class AccountDaoImpl implements AccountDao {
             Logger.error("Invalid account id. ", e);
             throw new ResourceNotFoundException("account", id);
         }
-        return entityManager.find(Account.class, longTypeId);
-        /*
-        Query query = session.createQuery("from Account account where id = '" + id + "'");
-        List list = query.list();
-        if (list.size() == 1) {
-            return (Account) list.get(0);
-        } else if (list.size() > 1) {
-            throw new InternalErrorException("Get more than one rows for id: " + id);
-        } else {
+        Account account = entityManager.find(Account.class, longTypeId);
+        if (account == null) {
             throw new ResourceNotFoundException("account", id);
-        }*/
+        }
+        return account;
     }
 
     @Override
     public Account createAccount(Account account) throws ZhiBoBaseException {
-        /*
-        Session session = sessionFactory.getCurrentSession();
         try {
-            session.save(account);
-        } catch (HibernateException e) {
+            entityManager.persist(account);
+        } catch (Exception e) {
             Logger.error("Internal Error in createAccount.", e);
             throw new InternalErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error.");
         }
         return account;
-        */
-        return null;
     }
 
     @Override
     public void deleteAccount(String id) throws ZhiBoBaseException {
-        /*
-        Session session = sessionFactory.getCurrentSession();
-
         Account account = getAccountById(id);
         try {
-            session.delete(account);
+            entityManager.remove(account);
         } catch (Exception e) {
             Logger.error("Internal Error in deleteAccount.", e);
             throw new InternalErrorException();
         }
-        */
     }
 
     @Override
     public void modifyAccount(String id, AccountModifyRequest accountModifyRequest) throws ZhiBoBaseException {
-        /*
-        Session session = sessionFactory.getCurrentSession();
+
         Account account = getAccountById(id);
         if (accountModifyRequest.getName() != null) {
             account.setName(accountModifyRequest.getName());
@@ -91,13 +76,7 @@ public class AccountDaoImpl implements AccountDao {
         if (accountModifyRequest.getPhoneNumber() != null) {
             account.setPhoneNumber(accountModifyRequest.getPhoneNumber());
         }
-        try {
-            session.update(account);
-        } catch (Exception e) {
-            Logger.error("Internal Error in modifyAccount.", e);
-            throw new InternalErrorException();
-        }
-        */
+
     }
 
     @Override

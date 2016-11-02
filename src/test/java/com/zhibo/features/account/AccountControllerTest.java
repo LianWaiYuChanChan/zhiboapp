@@ -95,14 +95,12 @@ public class AccountControllerTest {
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.name").value("aaa"))
                 .andReturn();
-
         Integer id = JsonPath.read(result.getResponse().getContentAsString(), "$.id");
         Assert.assertEquals(new Integer(1), id);
 
-        this.mockMvc.perform(delete("/api/account/"+id).contentType(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(delete("/api/account/" + id).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
-
-        this.mockMvc.perform(get("/api/account/"+id))
+        this.mockMvc.perform(get("/api/account/" + id))
                 .andExpect(status().isNotFound());
     }
 
