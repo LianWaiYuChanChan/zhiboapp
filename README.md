@@ -10,8 +10,8 @@ You can try :
 * http://127.0.0.1:8080/zhiboapp/api/account?filter=id=gt=1;id=lt=4
 
 ## CI Status
-* [![Build Status](https://travis-ci.org/LianWaiYuChanChan/zhiboapp.svg?branch=master)](https://travis-ci.org/LianWaiYuChanChan/zhiboapp)
-* [![codecov.io](https://codecov.io/github/LianWaiYuChanChan/zhiboapp/coverage.svg?branch=master)](https://codecov.io/github/LianWaiYuChanChan/zhiboapp?branch=master)
+* [![Build Status](https://travis-ci.org/LianWaiYuChanChan/zhiboapp.svg?branch=zhibo_rsql_jpa)](https://travis-ci.org/LianWaiYuChanChan/zhiboapp)
+* [![codecov.io](https://codecov.io/github/LianWaiYuChanChan/zhiboapp/coverage.svg?branch=zhibo_rsql_jpa)](https://codecov.io/github/LianWaiYuChanChan/zhiboapp?branch=zhibo_rsql_jpa)
 
 ## Goal
 	Expose REST Service based on Spring+Hibernate+PostgreSQL
