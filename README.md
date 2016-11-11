@@ -25,14 +25,15 @@ You can try :
 	
 ## Backlog
 0. CI setup (0)
-1. Paging
-2. HATEOAS
-3. Filter, OrderbyBy, count, groupBy.
+1. Basic Paging, Fields (always return all fields), Filter, OrderBy, Dot notation?
+2. Adanced query features: @count...Or not support, keep REST API simple.
+3. HATEOAS.
 4. Architecture: RQL + JPA&JPQL (based o hiberate)?
 5. API spec finalize
 6. Security Impl investigation and impl
 7. Interact with Cloud? Should we?
 8. Admin access, UI (WEB and App)?
+9. JPA based on Hibernate. Can be final solution? Final solution always mixed solution, since no one solution is perfect.
 
 ## How to build the code?
 
