@@ -22,11 +22,17 @@ You can try :
 ## Current status:
 	1. The GET path of REST is OK. (Browser -> Spring -> Hibernate -> PostgreSQL). (2016/10/23)
 	2. Featurs (CRUD) are supported: collection query, single resource query, create, modify, delete.
-	
+
+## Completed function list
+* Note: these items are moved from Backlog
+
 ## Backlog
 0. CI setup (0)
-1. Basic Paging, Fields (always return all fields), Filter, OrderBy, Dot notation?
+1. Basic Paging, Fields (always return all fields), Filter, OrderBy, Dot notation/reference/support?
 2. Adanced query features: @count...Or not support, keep REST API simple.
+2. Not reuturn null value.  to save the network data of customers' phone. 
+2. Select expected fields. Maybe not a issue. First step, can be return all fields.
+2. Embedded support.
 3. HATEOAS.
 4. Architecture: RQL + JPA&JPQL (based o hiberate)?
 5. API spec finalize
