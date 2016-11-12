@@ -5,17 +5,16 @@ import com.zhibo.infra.*;
 import cz.jirutka.rsql.parser.RSQLParser;
 import cz.jirutka.rsql.parser.ast.Node;
 import cz.jirutka.rsql.parser.ast.RSQLVisitor;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Selection;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -98,9 +97,10 @@ public class AccountDaoImpl implements AccountDao {
             //query.orderBy(...);
 
             // Execute and get results
+            Logger.info("JPA Query is '" + query + "'");
             accounts = entityManager.createQuery(query).getResultList();
         } else {
-            accounts = entityManager.createQuery("SELECT a FROM Account a", Account.class).getResultList();
+           accounts = entityManager.createQuery("SELECT a FROM Account a", Account.class).getResultList();
         }
         return accounts;
 

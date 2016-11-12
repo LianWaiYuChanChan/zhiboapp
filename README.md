@@ -19,20 +19,29 @@ You can try :
 ## Architecture
 	Apache + Tomcat + Spring + Hiberate + PostgreSQL
 	
-## Current status:
-	1. The GET path of REST is OK. (Browser -> Spring -> Hibernate -> PostgreSQL). (2016/10/23)
-	2. Featurs (CRUD) are supported: collection query, single resource query, create, modify, delete.
-	
+## Done features.
+1. User can do collection query to fetch all.
+2. User can do single instance query.
+3. User can do create, modify, delete operation.
+4. User can do collection with filter (Just like where clause of sql.)
+
+## Done infrastructure
+1. Tomcat + Spring + JPA + Hibernate + PostgreSQL
+2. CI based on Travis is done.
+3. Integration test based on HSQL is done.
+
 ## Backlog
-0. CI setup (0)
+0. Fields
 1. Paging
 2. HATEOAS
-3. Filter, OrderbyBy, count, groupBy.
-4. Architecture: RQL + JPA&JPQL (based o hiberate)?
+3. OrderbyBy, count, groupBy.
+4. Request Data validate: fields, filter, body.
 5. API spec finalize
-6. Security Impl investigation and impl
-7. Interact with Cloud? Should we?
+6. User Login, session manage, security impl investigation and impl
+7. Interact with Shipin Cloud? Should we?
 8. Admin access, UI (WEB and App)?
+9. Doc about Usage. For frontend developer.
+
 
 ## How to build the code?
 
@@ -80,7 +89,7 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 * Java: Java8
 * Tomcat: 7.0.72 (https://tomcat.apache.org/download-70.cgi)
 * Spring: 4.3.3  (http://docs.spring.io/spring/docs/4.3.3.RELEASE/)
-* Hibenate: 4.3.5 (More details: build.gradle)
+* Hibernate: 4.3.5 (More details: build.gradle)
 * Jackson: 2.8.3
 * PostgreSQL: 9.3.14 
 
@@ -105,11 +114,14 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 9. https://github.com/jirutka/rsql-parser (Good)
 10. https://github.com/tennaito/rsql-jpa (Query to JPA. Good)
 
-### REST Best pratices
+### REST Best practices
 1. http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#advanced-queries
 
 ### Hibernate or JPA
 1. http://cliffmeyers.com/blog/2011/7/18/why-i-finally-ditched-hibernate-native-apis-for-jpa.html
+
+### Projections
+1. http://www.objectdb.com/java/jpa/query/jpql/select
 
 ### README badge
 * http://shields.io/

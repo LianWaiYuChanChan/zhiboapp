@@ -104,4 +104,19 @@ public class AccountControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    public void testFilter() throws Exception {
+        this.mockMvc.perform(get("/api/account?filter=id=lt=0")
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.resources.length()").value(0));
+
+        this.mockMvc.perform(get("/api/account?filter=id==0")
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.resources[0].id").value(0));
+    }
+
 }

@@ -17,7 +17,7 @@
         http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
         ">
 
-    <import resource="classpath:/zhibo-servlet.xml"/>
+    <import resource="classpath:/zhibo-servlet-test.xml"/>
     <!-- Below configuration has been added to enable in memory DB HSQLDB  -->
 
     <jdbc:embedded-database id="dataSource" type="HSQL">

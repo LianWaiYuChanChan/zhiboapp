@@ -24,7 +24,6 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.3.5.Final'
     compile group: 'org.postgresql', name: 'postgresql', version: '9.3-1104-jdbc4'
 
-
     compile group: 'org.springframework', name: 'spring-core', version: springVersion
     compile group: 'org.springframework', name: 'spring-web', version: springVersion
     compile group: 'org.springframework', name: 'spring-webmvc', version: springVersion
@@ -41,7 +40,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.3.RELEASE'
     //Needed by spring test
-    testCompile group: 'com.jayway.jsonpath', name: 'json-path', version: '1.0.0'
+    testCompile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.2.0'
     testCompile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.4'
 
     providedCompile 'javax.servlet:servlet-api:2.5'
@@ -60,7 +59,9 @@ check.dependsOn war
 
 // This copy is let unit test can import the application context xml file.
 task('copyContextConfig', type: Copy) {
-       from(file(webAppDirName + "/WEB-INF/zhibo-servlet.xml"))
-       into('src/main/resources/')
+    from webAppDirName+"/WEB-INF/"
+    into 'src/main/resources/'
+    include '**/zhibo-servlet.xml'
+    rename 'zhibo-servlet.xml', 'zhibo-servlet-test.xml'
 }
 processResources.dependsOn copyContextConfig

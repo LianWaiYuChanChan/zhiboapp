@@ -21,13 +21,12 @@ public class AccountController {
     private AccountService accountService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/api/account")
+    @ResponseBody
     public Object getAccounts(
             HttpServletRequest request,
             HttpServletResponse response,
-            @RequestParam(name="filter", required = false) String filter
+            RequestData requestData
     ) {
-        final RequestData requestData = new RequestData();
-        requestData.setFilter(filter);
         final String METHOD_NAME = CLASS_NAME + ".getAccounts -- ";
         Logger.trace(METHOD_NAME + "Enter.");
         try {

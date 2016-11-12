@@ -1,5 +1,6 @@
 package com.zhibo.features.account;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.zhibo.infra.ResponseObject;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 
 @Entity
 @Table(name="account")
+@JsonInclude(JsonInclude.Include.NON_NULL) //TODO: make it as global config.
 public class Account implements ResponseObject {
 
     public Account() {
@@ -25,7 +27,6 @@ public class Account implements ResponseObject {
         this.name = name;
     }
 
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -33,7 +34,6 @@ public class Account implements ResponseObject {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
 
 
     public Long getId() {
