@@ -1,13 +1,6 @@
 # zhiboapp
 ## Goal of branch zhibo_rsql_jpa
-
 * Use https://github.com/tennaito/rsql-jpa to implement filter function.
-
-## Filter function can work now.
-
-You can try :
-* http://127.0.0.1:8080/zhiboapp/api/account?filter=id>1 and id<4
-* http://127.0.0.1:8080/zhiboapp/api/account?filter=id=gt=1;id=lt=4
 
 ## CI Status
 * [![Build Status](https://travis-ci.org/LianWaiYuChanChan/zhiboapp.svg?branch=zhiboapp_rsql_jpa)](https://travis-ci.org/LianWaiYuChanChan/zhiboapp)
@@ -24,6 +17,10 @@ You can try :
 2. User can do single instance query.
 3. User can do create, modify, delete operation.
 4. User can do collection with filter (Just like where clause of sql.)
+
+## Request Examples:
+1. http://127.0.0.1:8080/zhiboapp/api/account?filter=id>1 and id<4
+2.  http://127.0.0.1:8080/zhiboapp/api/account?filter=id=gt=1;id=lt=4
 
 ## Done infrastructure
 1. Tomcat + Spring + JPA + Hibernate + PostgreSQL
