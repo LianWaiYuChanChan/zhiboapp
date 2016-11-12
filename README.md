@@ -116,7 +116,9 @@ URL: http://127.0.0.1:8080/zhiboapp/api/account/1
           "id": 2
        }
    ```
+   
 #### Modify operation
+
 * Request:
  + Request method, url, headers
 ```javascript
@@ -131,6 +133,7 @@ Headers: Content-Type:application/json
 "phoneNumber":"246"
 }
 ```
+
 * Response:
  + Response status: 204(No Content)
  + Response Body: No response body.
