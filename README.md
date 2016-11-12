@@ -134,7 +134,7 @@ Headers: Content-Type:application/json
 }
 ```
 * Response:
-+ Response status: 200(OK)  (Need change to 201)
+ + Response status: 200(OK)  (Need change to 201)
 ** Response Body:
 ```json
     {
