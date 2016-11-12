@@ -126,6 +126,7 @@ HTTP Method: POST
 URL: http://127.0.0.1:8080/zhiboapp/api/account/2
 Headers: Content-Type:application/json
 ```
+
  + Request body:
 ```json
 {
