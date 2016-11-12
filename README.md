@@ -118,7 +118,6 @@ URL: http://127.0.0.1:8080/zhiboapp/api/account/1
    ```
    
 #### Modify operation
-
 * Request:
  + Request method, url, headers
 ```javascript
@@ -126,7 +125,6 @@ HTTP Method: POST
 URL: http://127.0.0.1:8080/zhiboapp/api/account/2
 Headers: Content-Type:application/json
 ```
-
  + Request body:
 ```json
 {
@@ -134,7 +132,6 @@ Headers: Content-Type:application/json
 "phoneNumber":"246"
 }
 ```
-
 * Response:
  + Response status: 204(No Content)
  + Response Body: No response body.
