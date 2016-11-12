@@ -61,7 +61,7 @@ URL: http://127.0.0.1:8080/zhiboapp/api/account
 * Response:
  + Response HTTP status: 200(OK)
  + Response Body:
-```json
+ ```json
     {
        "resources":
        [
@@ -72,7 +72,7 @@ URL: http://127.0.0.1:8080/zhiboapp/api/account
            }
        ]
     }
-```
+ ```
 
 #### One instance query
 * Request:
@@ -139,11 +139,11 @@ URL: http://127.0.0.1:8080/zhiboapp/api/account/1
 #### Delete operation
 * Request:
  + Request method, url, headers
-```javascript
-HTTP Method: DELETE
-URL: http://127.0.0.1:8080/zhiboapp/api/account/2
-Headers: Content-Type:application/json
-```
+ ```javascript
+ HTTP Method: DELETE
+ URL: http://127.0.0.1:8080/zhiboapp/api/account/2
+ Headers: Content-Type:application/json
+ ```
  + Request body: No Need Request body.
 
 * Response:
