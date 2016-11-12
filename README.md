@@ -5,20 +5,20 @@
 
 ## Filter function can work now.
 
-You can try : 
+You can try :
 * http://127.0.0.1:8080/zhiboapp/api/account?filter=id>1 and id<4
 * http://127.0.0.1:8080/zhiboapp/api/account?filter=id=gt=1;id=lt=4
 
 ## CI Status
-* [![Build Status](https://travis-ci.org/LianWaiYuChanChan/zhiboapp.svg?branch=master)](https://travis-ci.org/LianWaiYuChanChan/zhiboapp)
-* [![codecov.io](https://codecov.io/github/LianWaiYuChanChan/zhiboapp/coverage.svg?branch=master)](https://codecov.io/github/LianWaiYuChanChan/zhiboapp?branch=master)
+* [![Build Status](https://travis-ci.org/LianWaiYuChanChan/zhiboapp.svg?branch=zhiboapp_rsql_jpa)](https://travis-ci.org/LianWaiYuChanChan/zhiboapp)
+* [![codecov.io](https://codecov.io/github/LianWaiYuChanChan/zhiboapp/coverage.svg?branch=zhiboapp_rsql_jpa)](https://codecov.io/github/LianWaiYuChanChan/zhiboapp?branch=zhiboapp_rsql_jpa)
 
 ## Goal
 	Expose REST Service based on Spring+Hibernate+PostgreSQL
 
 ## Architecture
 	Apache + Tomcat + Spring + Hiberate + PostgreSQL
-	
+
 ## Done features.
 1. User can do collection query to fetch all.
 2. User can do single instance query.
@@ -30,18 +30,28 @@ You can try :
 2. CI based on Travis is done.
 3. Integration test based on HSQL is done.
 
+## Current status:
+	1. The GET path of REST is OK. (Browser -> Spring -> Hibernate -> PostgreSQL). (2016/10/23)
+	2. Featurs (CRUD) are supported: collection query, single resource query, create, modify, delete.
+
+## Completed function list
+* Note: these items are moved from Backlog
+
 ## Backlog
-0. Fields
-1. Paging
-2. HATEOAS
-3. OrderbyBy, count, groupBy.
-4. Request Data validate: fields, filter, body.
+0. CI setup (0)
+1. Basic Paging, Fields (always return all fields), Filter, OrderBy, Dot notation/reference/support?
+2. Adanced query features: @count...Or not support, keep REST API simple.
+2. Not reuturn null value.  to save the network data of customers' phone.
+2. Select expected fields. Maybe not a issue. First step, can be return all fields.
+2. Embedded support.
+3. HATEOAS.
+4. Architecture: RQL + JPA&JPQL (based o hiberate)?
 5. API spec finalize
 6. User Login, session manage, security impl investigation and impl
 7. Interact with Shipin Cloud? Should we?
 8. Admin access, UI (WEB and App)?
 9. Doc about Usage. For frontend developer.
-
+10. JPA based on Hibernate. Can be final solution? Final solution always mixed solution, since no one solution is perfect.
 
 ## How to build the code?
 
@@ -53,7 +63,7 @@ You can try :
 ## Test Environment configuration:
 
 Download Tomcat and PostgreSQL to your local machine. Check the versions in below sections.
-	
+
 ## How to test?
 1. gradle war #This task wll generate war to /path/to/zhiboapp/build/libs/zhiboapp.war
 2. Copy that war to <TomcatHome>/webapps/
@@ -91,7 +101,7 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 * Spring: 4.3.3  (http://docs.spring.io/spring/docs/4.3.3.RELEASE/)
 * Hibernate: 4.3.5 (More details: build.gradle)
 * Jackson: 2.8.3
-* PostgreSQL: 9.3.14 
+* PostgreSQL: 9.3.14
 
 ## References
 
@@ -125,4 +135,3 @@ Download Tomcat and PostgreSQL to your local machine. Check the versions in belo
 
 ### README badge
 * http://shields.io/
-
