@@ -60,32 +60,86 @@
 Download Tomcat and PostgreSQL to your local machine. Check the versions in above sections.
 
 ## How to test?
+If you want to test zhiboapp, you have prepare PostgreSQL and Tomcat.
+### Test way 1:  based on PostgreSQL and standalone Tomcat.
 1. gradle war #This task wll generate war to /path/to/zhiboapp/build/libs/zhiboapp.war
 2. Copy that war to <TomcatHome>/webapps/
 3. Start tomcat: cd <TomcatHome>/bin, then ./startup.sh or .\startup.bat
-4. Try access: http://127.0.0.1:8080/zhiboapp/api/account/account_1 using Chrome.
-5. Try SET operation (Note: must use REST client and specify header: Accept:application/json and Content-Type: application/json.). Request: POST http://127.0.0.1:8080/zhiboapp/api/account will return below message:
+4. The tomcat will listen on port 8080 of localhost (127.0.0.1).
+5. Then you have to prepare a REST client
+** If you are using Firefox, try : https://addons.mozilla.org/en-US/firefox/addon/restclient/
+** If you are using Chrome, try DHC REST client, PostMan.
+6. In REST client, fill in the HTTP method, URL, headers, and send your request.
+** For querying data, use HTTP method -- GET, headers -- Accept:application/json.
+** For create/modify operation, use HTTP method -- POST, headers -- Content-Type: application/json, Accept:application/json
+** For delete operation, use HTTP method -- DELETE.
+
+### Test way 2:  based on PostgreSQL and embedded Tomcat. (Without install tomcat)
+1. This way is similar with way 1. But it doesn't require you to install tomcat.
+2. Be sure your PostgreSQL service is up. Then run *gradle tomcatRun* in Terminal. Then the embedded tomcat will also start on 127.0.0.1:8080.
+3. Note: must run *gradle tomcatRun* at Terminal. Run it in IntelliJ may not work.
+
+### Some request and response example:
+#### Collection query:
+* Request:
+
+```javascript
+HTTP Method: GET
+URL: http://127.0.0.1:8080/zhiboapp/api/account
+```
+* Response HTTP status: 200(OK)
+* Response Body:
 ```json
     {
-       "phoneNumber": null,
-       "name": null,
+       "resources":
+       [
+           {
+               "phoneNumber": "123456789",
+               "name": "jack",
+               "id": 1
+           }
+       ]
+    }
+```
+
+#### One instance query
+* Request:
+```javascript
+HTTP Method: GET
+URL: http://127.0.0.1:8080/zhiboapp/api/account/1
+```
+* Response HTTP status: 200(OK)
+* Response Body:
+```json
+    {
+       "phoneNumber": "123456789",
+       "name": "jack",
        "id": 1
     }
 ```
 
-## Try current implemented function
-
-1. Run gradle tomcatRun  #This task will load the zhibo web app into a embedded tomcat
-2. The embedded tomcat will start on port 8080
-3. Open Browser, access URL: http://127.0.0.1:8080/zhiboapp/api/account/account_1, then you will get response like below:
-
-```json
-{"name":"Jack","phoneNumber":"12330940888","id":"account_1"}
+#### Create operation
+* Request:
+** Request method, url, headers
+```javascript
+HTTP Method: POST
+URL: http://127.0.0.1:8080/zhiboapp/api/account
+Headers: Content-Type:application/json
 ```
-
-4. If you try to access http://127.0.0.1:8080/zhiboapp/api/account/non_exist_account, it will report below error message:
-
+** Request body:
 ```json
-{"statusCode":404,"errorMessage":"Not found account: non_exist_account"}
+{
+"name":"Hello",
+"phoneNumber":"123"
+}
 ```
-
+* Response:
+** Response status: 200(OK)  (Need change to 201)
+** Response Body:
+```json
+    {
+       "phoneNumber": "123",
+       "name": "Hello",
+       "id": 2
+    }
+```
