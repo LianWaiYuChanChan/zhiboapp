@@ -37,8 +37,8 @@ If you want to test zhiboapp, you have prepare PostgreSQL and Tomcat.
 3. Start tomcat: cd <TomcatHome>/bin, then ./startup.sh or .\startup.bat
 4. The tomcat will listen on port 8080 of localhost (127.0.0.1).
 5. Then you have to prepare a REST client
-** If you are using Firefox, try : https://addons.mozilla.org/en-US/firefox/addon/restclient/
-** If you are using Chrome, try DHC REST client, PostMan.
+ * If you are using Firefox, try : https://addons.mozilla.org/en-US/firefox/addon/restclient/
+ * If you are using Chrome, try DHC REST client, PostMan.
 6. In REST client, fill in the HTTP method, URL, headers, and send your request.
 ** For querying data, use HTTP method -- GET, headers -- Accept:application/json.
 ** For create/modify operation, use HTTP method -- POST, headers -- Content-Type: application/json, Accept:application/json
