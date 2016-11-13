@@ -1,3 +1,4 @@
+
 CREATE SEQUENCE account_id_seq AS  BIGINT;
 
 CREATE TABLE account (

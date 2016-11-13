@@ -1,5 +1,6 @@
 package com.zhibo.features.account;
 
+import com.zhibo.infra.RequestData;
 import com.zhibo.infra.ZhiBoBaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Account> getAccounts() throws ZhiBoBaseException {
-        return accountDao.getAccounts();
+    public List<Account> getAccounts(final RequestData requestData) throws ZhiBoBaseException {
+        return accountDao.getAccounts(requestData);
     }
 }

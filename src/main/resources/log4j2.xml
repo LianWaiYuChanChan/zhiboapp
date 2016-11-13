@@ -23,7 +23,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="com.zhibo" level="DEBUG" additivity="true">
+        <Logger name="com.zhibo" level="debug" additivity="true">
             <AppenderRef ref="zhiboLoggerFile" />
         </Logger>
         <Root level="ERROR">

@@ -21,14 +21,16 @@ public class AccountController {
     private AccountService accountService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/api/account")
+    @ResponseBody
     public Object getAccounts(
             HttpServletRequest request,
-            HttpServletResponse response
+            HttpServletResponse response,
+            RequestData requestData
     ) {
         final String METHOD_NAME = CLASS_NAME + ".getAccounts -- ";
         Logger.trace(METHOD_NAME + "Enter.");
         try {
-            return ResourceCollection.create(accountService.getAccounts());
+            return ResourceCollection.create(accountService.getAccounts(requestData));
         } catch (ZhiBoBaseException e) {
             response.setStatus(e.getStatusCode().value());
             return new ErrorResponse(e);

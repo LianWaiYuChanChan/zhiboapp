@@ -17,27 +17,31 @@
         http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
         ">
 
-    <import resource="classpath:/zhibo-servlet.xml"/>
+    <import resource="classpath:/zhibo-servlet-test.xml"/>
     <!-- Below configuration has been added to enable in memory DB HSQLDB  -->
+
     <jdbc:embedded-database id="dataSource" type="HSQL">
         <jdbc:script location="classpath:schema.sql"/>
         <jdbc:script location="classpath:test-data.sql"/>
     </jdbc:embedded-database>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >
+
+    <bean id="entityManagerFactoryBean" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan">
-            <list>
-                <value>com.zhibo.features</value>
-            </list>
+        <!-- This makes /META-INF/persistence.xml is no longer necessary -->
+        <property name="packagesToScan" value="com.zhibo.features"/>
+        <!-- JpaVendorAdapter implementation for Hibernate EntityManager.
+             Exposes Hibernate's persistence provider and EntityManager extension interface -->
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
-        <property name="hibernateProperties">
+        <property name="jpaProperties">
             <props>
+                <!--<prop key="hibernate.hbm2ddl.auto">validate</prop>-->
                 <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
             </props>
         </property>
     </bean>
-
 </beans>

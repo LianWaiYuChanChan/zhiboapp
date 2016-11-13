@@ -95,15 +95,28 @@ public class AccountControllerTest {
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.name").value("aaa"))
                 .andReturn();
-
         Integer id = JsonPath.read(result.getResponse().getContentAsString(), "$.id");
         Assert.assertEquals(new Integer(1), id);
 
-        this.mockMvc.perform(delete("/api/account/"+id).contentType(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(delete("/api/account/" + id).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
-
-        this.mockMvc.perform(get("/api/account/"+id))
+        this.mockMvc.perform(get("/api/account/" + id))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void testFilter() throws Exception {
+        this.mockMvc.perform(get("/api/account?filter=id=lt=0")
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.resources.length()").value(0));
+
+        this.mockMvc.perform(get("/api/account?filter=id==0")
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.resources[0].id").value(0));
     }
 
 }

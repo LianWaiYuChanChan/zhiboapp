@@ -1,6 +1,7 @@
 package com.zhibo.features.account;
 
 
+import com.zhibo.infra.RequestData;
 import com.zhibo.infra.ZhiBoBaseException;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public interface AccountDao {
 
     void modifyAccount(String id, AccountModifyRequest accountModifyRequest) throws ZhiBoBaseException;
 
-    List<Account> getAccounts() throws  ZhiBoBaseException;
+    List<Account> getAccounts(final RequestData requestData) throws  ZhiBoBaseException;
 }
