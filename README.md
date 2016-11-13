@@ -40,9 +40,9 @@ If you want to test zhiboapp, you have prepare PostgreSQL and Tomcat.
  * If you are using Firefox, try : https://addons.mozilla.org/en-US/firefox/addon/restclient/
  * If you are using Chrome, try DHC REST client, PostMan.
 6. In REST client, fill in the HTTP method, URL, headers, and send your request.
-** For querying data, use HTTP method -- GET, headers -- Accept:application/json.
-** For create/modify operation, use HTTP method -- POST, headers -- Content-Type: application/json, Accept:application/json
-** For delete operation, use HTTP method -- DELETE.
+ * For querying data, use HTTP method -- GET, headers -- Accept:application/json.
+ * For create/modify operation, use HTTP method -- POST, headers -- Content-Type: application/json, Accept:application/json
+ * For delete operation, use HTTP method -- DELETE.
 
 ### Test way 2:  based on PostgreSQL and embedded Tomcat. (Without install tomcat)
 1. This way is similar with way 1. But it doesn't require you to install tomcat.
