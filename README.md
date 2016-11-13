@@ -169,14 +169,14 @@ URL: http://127.0.0.1:8080/zhiboapp/api/account/1
 0. CI setup (0)
 1. Basic Paging, Fields (always return all fields), Filter, OrderBy, Dot notation/reference/support?
 2. Adanced query features: @count...Or not support, keep REST API simple.
-2. Not reuturn null value.  to save the network data of customers phone.
-2. Select expected fields. Maybe not a issue. First step, can be return all fields.
-2. Embedded support.
-3. HATEOAS.
-4. Architecture: RQL + JPA&JPQL (based o hiberate)?
-5. API spec finalize
-6. User Login, session manage, security impl investigation and impl
-7. Interact with Shipin Cloud? Should we?
-8. Admin access, UI (WEB and App)?
-9. Doc about Usage. For frontend developer.
-10. JPA based on Hibernate. Can be final solution? Final solution always mixed solution, since no one solution is perfect.
+3. Not reuturn null value.  to save the network data of customers phone.
+4. Select expected fields. Maybe not a issue. First step, can be return all fields.
+5. Embedded support.
+6. HATEOAS.
+7. Architecture: RQL + JPA&JPQL (based o hiberate)?
+8. API spec finalize
+9. User Login, session manage, security impl investigation and impl
+10. Interact with Shipin Cloud? Should we?
+11. Admin access, UI (WEB and App)?
+12. Doc about Usage. For frontend developer.
+13. JPA based on Hibernate. Can be final solution? Final solution always mixed solution, since no one solution is perfect.
