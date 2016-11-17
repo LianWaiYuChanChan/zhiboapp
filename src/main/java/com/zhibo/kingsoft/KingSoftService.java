@@ -15,4 +15,7 @@ public interface KingSoftService {
      * @return
      */
     String computeSignature(Long expire, PushStreamResource resource) throws Exception;
+
+    String constructPushUrl(String zhiboName, Long expire, String nonce, String vdoid,
+                            String accessKey) throws Exception;
 }

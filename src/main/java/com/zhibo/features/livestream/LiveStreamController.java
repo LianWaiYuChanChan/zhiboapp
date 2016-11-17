@@ -1,6 +1,7 @@
 package com.zhibo.features.livestream;
 
 import com.zhibo.infra.RequestData;
+import com.zhibo.infra.ZhiBoBaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,7 +36,7 @@ public class LiveStreamController {
     public Object pushStream(
             HttpServletRequest request,
             HttpServletResponse response,
-            @RequestBody LiveStreamPushRequest pushRequest) {
+            @RequestBody LiveStreamPushRequest pushRequest) throws ZhiBoBaseException {
         return liveStreamService.pushStream(pushRequest);
     }
 

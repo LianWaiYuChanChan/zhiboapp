@@ -1,6 +1,8 @@
 package com.zhibo.features.livestream;
 
+import com.zhibo.infra.InternalErrorException;
 import com.zhibo.infra.RequestData;
+import com.zhibo.infra.ZhiBoBaseException;
 
 import java.util.List;
 
@@ -14,7 +16,7 @@ public interface LiveStreamDao {
      * @param liveStream
      * @return
      */
-    LiveStream create(final LiveStream liveStream);
+    LiveStream create(final LiveStream liveStream) throws ZhiBoBaseException;
 
     /**
      * Delete live stream according to the id property of liveStream.
