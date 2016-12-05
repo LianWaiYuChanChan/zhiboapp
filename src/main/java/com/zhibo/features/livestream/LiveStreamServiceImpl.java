@@ -1,8 +1,6 @@
 package com.zhibo.features.livestream;
 
-import com.zhibo.infra.InternalErrorException;
-import com.zhibo.infra.Logger;
-import com.zhibo.infra.ZhiBoBaseException;
+import com.zhibo.infra.*;
 import com.zhibo.kingsoft.KingSoftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.Instant;
+import java.util.List;
 
 /**
  * Created by jichao on 2016/11/14.
@@ -45,5 +44,20 @@ public class LiveStreamServiceImpl implements LiveStreamService {
         liveStream.setPullUrl(pullUrl);
         liveStream.setName(name);
         return liveStreamDao.create(liveStream);
+    }
+
+    @Override
+    public List<LiveStream> getAll(RequestData requestData) throws ZhiBoBaseException {
+        return liveStreamDao.getAll(requestData);
+    }
+
+    @Override
+    public LiveStream getById(String idStr) throws ZhiBoBaseException {
+        return liveStreamDao.getById(idStr);
+    }
+
+    @Override
+    public void deleteById(String id) throws ZhiBoBaseException {
+        liveStreamDao.deleteById(id);
     }
 }

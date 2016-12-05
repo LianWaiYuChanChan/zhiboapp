@@ -15,6 +15,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -56,6 +58,24 @@ public class LiveStreamControllerTest {
                 .andReturn();
         Integer id = JsonPath.read(result.getResponse().getContentAsString(), "$.id");
         Assert.assertEquals(new Integer(0), id);
+
+        this.mockMvc.perform(get("/api/livestream")
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.resources[0].name").value("aaa"));
+
+        this.mockMvc.perform(get("/api/livestream/0")
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.name").value("aaa"));
+
+        this.mockMvc.perform(delete("/api/livestream/0").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+
+        this.mockMvc.perform(get("/api/livestream/0"))
+                .andExpect(status().isNotFound());
     }
 
 }
