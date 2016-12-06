@@ -69,7 +69,8 @@ public class LiveStreamControllerTest {
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$.name").value("aaa"));
+                .andExpect(jsonPath("$.name").value("aaa"))
+                .andExpect(jsonPath("$.status").value("INITIALIZED"));
 
         this.mockMvc.perform(delete("/api/livestream/0").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());

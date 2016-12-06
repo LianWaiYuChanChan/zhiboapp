@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS  livestream;
 CREATE TABLE livestream (
     id SERIAL PRIMARY KEY,
     name varchar NOT NULL,
+    status smallint DEFAULT 0,
     pushurl varchar,
     pullurl varchar
 );

@@ -24,7 +24,6 @@ public class LiveStream implements ResponseObject {
         this.name = name;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -32,9 +31,6 @@ public class LiveStream implements ResponseObject {
     public void setId(Long id) {
         this.id = id;
     }
-
-    @Column(name="name")
-    private String name;
 
     public String getPushUrl() {
         return pushUrl;
@@ -52,14 +48,28 @@ public class LiveStream implements ResponseObject {
         this.pullUrl = pullUrl;
     }
 
+    public LiveStreamStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(LiveStreamStatusEnum status) {
+        this.status = status;
+    }
+
+    @Column(name="name")
+    private String name;
+
     @Column(name="pushurl")
     private String pushUrl;
 
     @Column(name="pullurl")
     private String pullUrl;
 
-    //TODO; Account
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name="status")
+    private LiveStreamStatusEnum status;
 
+    //TODO; Account
     @Id
     @SequenceGenerator(name="livestream_id_seq",
             sequenceName="livestream_id_seq",
