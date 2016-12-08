@@ -12,6 +12,7 @@ CREATE TABLE livestream (
     id SERIAL PRIMARY KEY,
     name varchar NOT NULL,
     status smallint DEFAULT 0,
+    isPublic boolean,
     pushurl varchar,
     pullurl varchar
 );

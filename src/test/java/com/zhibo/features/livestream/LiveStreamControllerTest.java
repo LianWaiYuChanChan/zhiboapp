@@ -48,7 +48,8 @@ public class LiveStreamControllerTest {
         MvcResult result = this.mockMvc.perform(post("/api/livestream")
                 .content("{\n" +
                         "\"name\":\"aaa\",\n" +
-                        "\"accountId\":\"1233444\"\n" +
+                        "\"accountId\":\"1233444\"," +
+                        "\"public\":true" +
                         "}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
@@ -65,13 +66,16 @@ public class LiveStreamControllerTest {
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.resources[0].name").value("aaa"));
 
-        this.mockMvc.perform(get("/api/livestream/0")
+        result = this.mockMvc.perform(get("/api/livestream/0")
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.name").value("aaa"))
-                .andExpect(jsonPath("$.status").value("INITIALIZED"));
-
+                .andExpect(jsonPath("$.status").value("INITIALIZED"))
+                .andExpect(jsonPath("$.public").value(true))
+                .andReturn();
+        String respBody = result.getResponse().getContentAsString();
+        System.out.println(respBody); //For debug info.
         this.mockMvc.perform(delete("/api/livestream/0").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 

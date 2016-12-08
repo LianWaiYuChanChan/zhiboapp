@@ -43,6 +43,7 @@ public class LiveStreamServiceImpl implements LiveStreamService {
         liveStream.setPushUrl(pushUrl);
         liveStream.setPullUrl(pullUrl);
         liveStream.setName(name);
+        liveStream.setPublic(liveStreamPushRequest.getPublic());
         liveStream.setStatus(LiveStreamStatusEnum.INITIALIZED);
         return liveStreamDao.create(liveStream);
     }

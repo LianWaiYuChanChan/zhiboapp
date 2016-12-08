@@ -56,6 +56,14 @@ public class LiveStream implements ResponseObject {
         this.status = status;
     }
 
+    public Boolean getPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(Boolean aPublic) {
+        isPublic = aPublic;
+    }
+
     @Column(name="name")
     private String name;
 
@@ -68,6 +76,9 @@ public class LiveStream implements ResponseObject {
     @Enumerated(EnumType.ORDINAL)
     @Column(name="status")
     private LiveStreamStatusEnum status;
+
+    @Column(name="ispublic")
+    private Boolean isPublic = false;
 
     //TODO; Account
     @Id

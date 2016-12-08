@@ -23,4 +23,14 @@ public class LiveStreamPushRequest {
 
     private String name;
     private String accountId;//TODO: user reference type.
+
+    public Boolean getPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(Boolean aPublic) {
+        isPublic = aPublic;
+    }
+
+    private Boolean isPublic;
 }
