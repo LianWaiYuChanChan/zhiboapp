@@ -1,5 +1,7 @@
 package com.zhibo.features.livestream;
 
+import com.zhibo.features.account.Account;
+
 /**
  * Created by jichao on 2016/11/14.
  */
@@ -13,16 +15,17 @@ public class LiveStreamPushRequest {
         this.name = name;
     }
 
-    public String getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
-
     private String name;
-    private String accountId;//TODO: user reference type.
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    private Account account;
 
     public Boolean getPublic() {
         return isPublic;

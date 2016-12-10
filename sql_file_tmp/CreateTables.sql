@@ -11,8 +11,10 @@ DROP TABLE IF EXISTS  livestream;
 CREATE TABLE livestream (
     id SERIAL PRIMARY KEY,
     name varchar NOT NULL,
+    account_id integer,
     status smallint DEFAULT 0,
     isPublic boolean,
     pushurl varchar,
-    pullurl varchar
+    pullurl varchar,
+    FOREIGN KEY (account_id) REFERENCES account (id)
 );

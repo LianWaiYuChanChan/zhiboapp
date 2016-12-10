@@ -1,6 +1,7 @@
 package com.zhibo.features.livestream;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.zhibo.features.account.Account;
 import com.zhibo.infra.ResponseObject;
 
 import javax.persistence.*;
@@ -64,6 +65,14 @@ public class LiveStream implements ResponseObject {
         isPublic = aPublic;
     }
 
+    public Account getHost() {
+        return host;
+    }
+
+    public void setHost(Account host) {
+        this.host = host;
+    }
+
     @Column(name="name")
     private String name;
 
@@ -80,7 +89,10 @@ public class LiveStream implements ResponseObject {
     @Column(name="ispublic")
     private Boolean isPublic = false;
 
-    //TODO; Account
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    private Account host;
+
     @Id
     @SequenceGenerator(name="livestream_id_seq",
             sequenceName="livestream_id_seq",

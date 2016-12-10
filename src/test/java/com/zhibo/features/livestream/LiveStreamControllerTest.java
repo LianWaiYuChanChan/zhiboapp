@@ -30,18 +30,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration("classpath:test-account-controller-context.xml")
 public class LiveStreamControllerTest {
 
-
     @Autowired
     private WebApplicationContext wac;
 
     private MockMvc mockMvc;
 
-
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
-
 
     @Test
     public void Crud() throws Exception {
@@ -81,6 +78,49 @@ public class LiveStreamControllerTest {
 
         this.mockMvc.perform(get("/api/livestream/0"))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void testOneToOneBetweenLiveStreamAndAccount() throws Exception {
+        // Step 1 : prepare a user
+        MvcResult resultCreateAccount = this.mockMvc.perform(post("/api/account")
+                .content("{\n" +
+                        "\"name\":\"aaa\",\n" +
+                        "\"phoneNumber\":\"1233444\"\n" +
+                        "}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.name").value("aaa"))
+                .andReturn();
+        Integer accountId = JsonPath.read(resultCreateAccount.getResponse().getContentAsString(), "$.id");
+
+        //Step 2: Create a live stream for created user in above step
+        MvcResult resultCreateLiveStream = this.mockMvc.perform(post("/api/livestream")
+                .content("{\n" +
+                        "\"name\":\"testHostProperty\",\n" +
+                        "\"account\":{\"id\":\""+
+                        accountId +
+                        "\"}," +
+                        "\"public\":true" +
+                        "}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.name").value("testHostProperty"))
+                .andReturn();
+        String responseBody = resultCreateLiveStream.getResponse().getContentAsString();
+        Integer liveStreamId = JsonPath.read(responseBody, "$.id");
+        System.out.println(responseBody);//For debug purpose.
+
+        // Step 3: query created live stream.
+        this.mockMvc.perform(get("/api/livestream/"+liveStreamId)
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.host.id").value(accountId));
     }
 
 }

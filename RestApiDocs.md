@@ -10,21 +10,25 @@
     + Request body:
    ```json
     {
-        "name":"aaa",
-        "accountId":"1233444",
+        "name":"mylivestream",
+        "account":{ "id":1},
         "public":false
     }
    ```
    * Response:
-    + Response status: 200(OK) 
+    + Response status: 200(OK)
     + Response Body:
    ```json
     {
-       "name": "aaa",
-       "pushUrl": "rtmp://aaa.uplive.ks-cdn.com/live/stream?signature=TZPCPTi3ZZci1f17AfEooTfs2iU=&accessKey=aceesKeyValueFromWhere&expire=1481226087&nonce=TODO&vdoid=123",
-       "pullUrl": "rtmp://aaa.rtmplive.ks-cdn.com/live/stream",
+       "name": "mylivestream",
+       "pushUrl": "rtmp://mylivestream.uplive.ks-cdn.com/live/stream?signature=Mv+ZRDthGgBNCcv6kOxJtO6NcsI=&accessKey=aceesKeyValueFromWhere&expire=1481360724&nonce=TODO&vdoid=123",
+       "pullUrl": "rtmp://mylivestream.rtmplive.ks-cdn.com/live/stream",
        "status": "INITIALIZED",
-       "id": 3,
+       "host":
+       {
+           "id": 1
+       },
+       "id": 2,
        "public": false
     }
    ```
