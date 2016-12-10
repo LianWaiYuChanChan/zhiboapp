@@ -32,3 +32,20 @@
        "public": false
     }
    ```
+### watch livestream
+   * Request:
+    + Request method, url, headers
+   ```javascript
+   HTTP Method: POST
+   URL: http://127.0.0.1:8080/zhiboapp/api/account/6/watch
+   Headers: Content-Type:application/json
+   ```
+    + Request body:
+   ```json
+    {
+    "liveStream":{"id":1}
+    }
+   ```
+   * Response:
+    + Response status: 204(No-Content)
+    + Response Body: NA

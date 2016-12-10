@@ -19,4 +19,6 @@ public interface AccountService {
     void modifyAccount(String id, AccountModifyRequest accountModifyRequest) throws ZhiBoBaseException;
 
     List<Account> getAccounts(final RequestData requestData) throws ZhiBoBaseException;
+
+    void watchLiveStream(String id, AccountWatchRequest accountWatchRequest) throws  ZhiBoBaseException;
 }

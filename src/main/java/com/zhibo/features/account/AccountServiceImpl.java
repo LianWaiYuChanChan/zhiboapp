@@ -41,4 +41,9 @@ public class AccountServiceImpl implements AccountService {
     public List<Account> getAccounts(final RequestData requestData) throws ZhiBoBaseException {
         return accountDao.getAccounts(requestData);
     }
+
+    @Override
+    public void watchLiveStream(String id, AccountWatchRequest accountWatchRequest) throws ZhiBoBaseException {
+        accountDao.watchLiveStream(id, accountWatchRequest.getLiveStream());
+    }
 }

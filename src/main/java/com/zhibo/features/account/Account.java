@@ -1,6 +1,7 @@
 package com.zhibo.features.account;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.zhibo.features.livestream.LiveStream;
 import com.zhibo.infra.ResponseObject;
 
 import javax.persistence.*;
@@ -35,7 +36,6 @@ public class Account implements ResponseObject {
         this.phoneNumber = phoneNumber;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -49,6 +49,18 @@ public class Account implements ResponseObject {
 
     @Column(name="name")
     private String name;
+
+    public LiveStream getWatchingStream() {
+        return watchingStream;
+    }
+
+    public void setWatchingStream(LiveStream watchingStream) {
+        this.watchingStream = watchingStream;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "watchingstream_id")
+    private LiveStream watchingStream;
 
     @Id
     @SequenceGenerator(name="account_id_seq",

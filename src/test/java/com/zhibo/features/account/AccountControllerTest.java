@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -58,25 +59,21 @@ public class AccountControllerTest {
         originalName = JsonPath.read(content, "$.name");
         this.mockMvc.perform(post("/api/account/0")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\":\"changedname\"}")
-        )
+                .content("{\"name\":\"changedname\"}"))
                 .andExpect(status().isNoContent());
         this.mockMvc.perform(get("/api/account/0")
-                .accept(MediaType.parseMediaType("application/json;charset=UTF-8"))
-        )
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("changedname"));
 
         //Roll back the name
         this.mockMvc.perform(post("/api/account/0")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\":\"" + originalName + "\"}")
-        )
+                .content("{\"name\":\"" + originalName + "\"}"))
                 .andExpect(status().isNoContent());
 
         this.mockMvc.perform(get("/api/account/0")
-                .accept(MediaType.parseMediaType("application/json;charset=UTF-8"))
-        )
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value(originalName));
 
@@ -96,8 +93,6 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.name").value("aaa"))
                 .andReturn();
         Integer id = JsonPath.read(result.getResponse().getContentAsString(), "$.id");
-        Assert.assertEquals(new Integer(1), id);
-
         this.mockMvc.perform(delete("/api/account/" + id).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
         this.mockMvc.perform(get("/api/account/" + id))
@@ -117,6 +112,56 @@ public class AccountControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.resources[0].id").value(0));
+    }
+
+    @Test
+    public void testWatchingStream() throws Exception {
+
+        // Step 1: create one account and one livestream
+        MvcResult resultCreateAccount = this.mockMvc.perform(post("/api/account")
+                .content("{\n" +
+                        "\"name\":\"aaa\",\n" +
+                        "\"phoneNumber\":\"1233444\"\n" +
+                        "}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.name").value("aaa"))
+                .andReturn();
+        Integer accountId = JsonPath.read(resultCreateAccount.getResponse().getContentAsString(), "$.id");
+
+        MvcResult resultCreateLiveStream = this.mockMvc.perform(post("/api/livestream")
+                .content("{\n" +
+                        "\"name\":\"testHostProperty\",\n" +
+                        "\"public\":true" +
+                        "}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.name").value("testHostProperty"))
+                .andReturn();
+        String responseBody = resultCreateLiveStream.getResponse().getContentAsString();
+        Integer liveStreamId = JsonPath.read(responseBody, "$.id");
+
+        // Step 2: call account.watch
+        MvcResult resultWatchLiveStream = this.mockMvc.perform(post("/api/account/" + accountId + "/watch")
+                .content("{" +
+                        "\"liveStream\":{\"id\":" + liveStreamId + "}" +
+                        "}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isNoContent())
+                .andReturn();
+
+        // Step 3: verify the result;
+        MvcResult result = this.mockMvc.perform(get("/api/account/" + accountId)).andReturn();
+
+        String content = result.getResponse().getContentAsString();
+        System.out.println(content);
+        Integer id = JsonPath.read(result.getResponse().getContentAsString(), "$.watchingStream.id");
+        assertEquals(liveStreamId, id);
     }
 
 }

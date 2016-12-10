@@ -106,4 +106,23 @@ public class AccountController {
         }
     }
 
+    @RequestMapping(method = RequestMethod.POST
+            , value = "/api/account/{id}/watch"
+            , consumes = "application/json")
+    @ResponseBody
+    public ResponseObject watchLiveStream(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @PathVariable("id") String id,
+            @RequestBody AccountWatchRequest accountWatchRequest) {
+        try {
+            accountService.watchLiveStream(id, accountWatchRequest);
+            response.setStatus(HttpStatus.NO_CONTENT.value());
+            return null;
+        } catch (ZhiBoBaseException e) {
+            response.setStatus(e.getStatusCode().value());
+            return new ErrorResponse(e);
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.zhibo.features.account;
 
 
+import com.zhibo.features.livestream.LiveStream;
 import com.zhibo.infra.RequestData;
 import com.zhibo.infra.ZhiBoBaseException;
 
@@ -19,4 +20,6 @@ public interface AccountDao {
     void modifyAccount(String id, AccountModifyRequest accountModifyRequest) throws ZhiBoBaseException;
 
     List<Account> getAccounts(final RequestData requestData) throws  ZhiBoBaseException;
+
+    void watchLiveStream(String id, LiveStream liveStream) throws  ZhiBoBaseException;
 }

@@ -1,6 +1,7 @@
 package com.zhibo.features.account;
 
 import com.github.tennaito.rsql.jpa.JpaCriteriaQueryVisitor;
+import com.zhibo.features.livestream.LiveStream;
 import com.zhibo.infra.*;
 import cz.jirutka.rsql.parser.RSQLParser;
 import cz.jirutka.rsql.parser.ast.Node;
@@ -105,4 +106,12 @@ public class AccountDaoImpl implements AccountDao {
         return accounts;
 
     }
+
+    @Override
+    public void watchLiveStream(String id, LiveStream liveStream) throws ZhiBoBaseException {
+        Account account = getAccountById(id);
+        account.setWatchingStream(liveStream);
+        entityManager.persist(account);
+    }
+
 }
