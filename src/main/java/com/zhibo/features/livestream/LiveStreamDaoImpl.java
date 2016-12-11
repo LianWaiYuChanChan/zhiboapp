@@ -89,4 +89,16 @@ public class LiveStreamDaoImpl implements LiveStreamDao {
             throw new InternalErrorException();
         }
     }
+
+    @Override
+    public void updateStatusAsOk(String id) throws ZhiBoBaseException {
+        LiveStream liveStream = getById(id);
+        liveStream.setStatus(LiveStreamStatusEnum.OK);
+        try {
+            entityManager.persist(liveStream);
+        } catch (Exception e) {
+            Logger.error("Internal Error in updateStatusAsOk live steam for id = ." + id, e);
+            throw new InternalErrorException();
+        }
+    }
 }

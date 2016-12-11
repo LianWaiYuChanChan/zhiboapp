@@ -46,4 +46,6 @@ public interface LiveStreamDao {
     LiveStream getById(String idStr) throws ZhiBoBaseException;
 
     void deleteById(String id) throws ZhiBoBaseException;
+
+    void updateStatusAsOk(String id) throws ZhiBoBaseException;;
 }

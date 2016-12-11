@@ -63,4 +63,9 @@ public class LiveStreamServiceImpl implements LiveStreamService {
     public void deleteById(String id) throws ZhiBoBaseException {
         liveStreamDao.deleteById(id);
     }
+
+    @Override
+    public void sendHeartbeat(String id) throws ZhiBoBaseException {
+        liveStreamDao.updateStatusAsOk(id);
+    }
 }

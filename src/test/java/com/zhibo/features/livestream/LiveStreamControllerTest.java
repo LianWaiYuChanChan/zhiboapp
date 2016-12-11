@@ -123,4 +123,60 @@ public class LiveStreamControllerTest {
                 .andExpect(jsonPath("$.host.id").value(accountId));
     }
 
+    @Test
+    public void testSendHeartbeat() throws Exception {
+        // Step 1 : prepare a user
+        MvcResult resultCreateAccount = this.mockMvc.perform(post("/api/account")
+                .content("{\n" +
+                        "\"name\":\"aaa\",\n" +
+                        "\"phoneNumber\":\"1233444\"\n" +
+                        "}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.name").value("aaa"))
+                .andReturn();
+        Integer accountId = JsonPath.read(resultCreateAccount.getResponse().getContentAsString(), "$.id");
+
+        //Step 2: Create a live stream for created user in above step
+        MvcResult resultCreateLiveStream = this.mockMvc.perform(post("/api/livestream")
+                .content("{\n" +
+                        "\"name\":\"testSendHeartbeat\",\n" +
+                        "\"account\":{\"id\":\""+
+                        accountId +
+                        "\"}," +
+                        "\"public\":true" +
+                        "}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.name").value("testSendHeartbeat"))
+                .andReturn();
+        String responseBody = resultCreateLiveStream.getResponse().getContentAsString();
+        Integer liveStreamId = JsonPath.read(responseBody, "$.id");
+
+        // Step 3: query created live stream.
+        this.mockMvc.perform(get("/api/livestream/"+liveStreamId)
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.host.id").value(accountId))
+                .andExpect(jsonPath("$.status").value("INITIALIZED"));
+
+        // Step 4: update status.
+        this.mockMvc.perform(post("/api/livestream/"+liveStreamId+"/sendheartbeat")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+
+        // Step 5: verify result.
+        this.mockMvc.perform(get("/api/livestream/"+liveStreamId)
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.host.id").value(accountId))
+                .andExpect(jsonPath("$.status").value("OK"));
+    }
+
 }
