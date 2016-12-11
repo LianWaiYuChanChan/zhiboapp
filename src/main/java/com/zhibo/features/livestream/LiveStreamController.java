@@ -92,4 +92,22 @@ public class LiveStreamController {
         }
     }
 
+    @RequestMapping(method = RequestMethod.POST
+            , value = "/api/livestream/{id}/close"
+            , consumes = "application/json")
+    @ResponseBody
+    public ResponseObject close(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @PathVariable("id") String id) {
+        try {
+            liveStreamService.close(id);
+            response.setStatus(HttpStatus.NO_CONTENT.value());
+            return null;
+        } catch (ZhiBoBaseException e) {
+            response.setStatus(e.getStatusCode().value());
+            return new ErrorResponse(e);
+        }
+    }
+
 }

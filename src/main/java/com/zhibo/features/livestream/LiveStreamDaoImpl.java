@@ -101,4 +101,16 @@ public class LiveStreamDaoImpl implements LiveStreamDao {
             throw new InternalErrorException();
         }
     }
+
+    @Override
+    public void close(String id) throws ZhiBoBaseException {
+        LiveStream liveStream = getById(id);
+        liveStream.setStatus(LiveStreamStatusEnum.CLOSED);
+        try {
+            entityManager.persist(liveStream);
+        } catch (Exception e) {
+            Logger.error("Internal Error in close live steam for id = ." + id, e);
+            throw new InternalErrorException();
+        }
+    }
 }

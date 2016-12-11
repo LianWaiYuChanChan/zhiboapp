@@ -68,4 +68,9 @@ public class LiveStreamServiceImpl implements LiveStreamService {
     public void sendHeartbeat(String id) throws ZhiBoBaseException {
         liveStreamDao.updateStatusAsOk(id);
     }
+
+    @Override
+    public void close(String id) throws ZhiBoBaseException {
+        liveStreamDao.close(id);
+    }
 }

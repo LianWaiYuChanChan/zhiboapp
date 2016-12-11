@@ -124,7 +124,7 @@ public class LiveStreamControllerTest {
     }
 
     @Test
-    public void testSendHeartbeat() throws Exception {
+    public void testSendHeartbeatAndClose() throws Exception {
         // Step 1 : prepare a user
         MvcResult resultCreateAccount = this.mockMvc.perform(post("/api/account")
                 .content("{\n" +
@@ -177,6 +177,22 @@ public class LiveStreamControllerTest {
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.host.id").value(accountId))
                 .andExpect(jsonPath("$.status").value("OK"));
+
+        //Step 6: close
+        // Step 4: update status.
+        this.mockMvc.perform(post("/api/livestream/"+liveStreamId+"/close")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+
+
+        // Step 7: verify close result.
+        this.mockMvc.perform(get("/api/livestream/"+liveStreamId)
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.host.id").value(accountId))
+                .andExpect(jsonPath("$.status").value("CLOSED"));
+
     }
 
 }
