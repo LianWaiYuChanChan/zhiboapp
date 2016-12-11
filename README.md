@@ -1,8 +1,8 @@
 # zhiboapp
 
 ## CI Status
-* [![Build Status](https://travis-ci.org/LianWaiYuChanChan/zhiboapp.svg?branch=zhiboapp_rsql_jpa)](https://travis-ci.org/LianWaiYuChanChan/zhiboapp)
-* [![codecov.io](https://codecov.io/github/LianWaiYuChanChan/zhiboapp/coverage.svg?branch=zhiboapp_rsql_jpa)](https://codecov.io/github/LianWaiYuChanChan/zhiboapp?branch=zhiboapp_rsql_jpa)
+* [![Build Status](https://travis-ci.org/LianWaiYuChanChan/zhiboapp.svg?branch=livestream_restapi)](https://travis-ci.org/LianWaiYuChanChan/zhiboapp)
+* [![codecov.io](https://codecov.io/github/LianWaiYuChanChan/zhiboapp/coverage.svg?branch=livestream_restapi)](https://codecov.io/github/LianWaiYuChanChan/zhiboapp?branch=livestream_restapi)
 
 ## Goal
 * Expose REST Service based on Apache + Tomcat + Spring MVC + JPA + Hibernate + PostgreSQL
