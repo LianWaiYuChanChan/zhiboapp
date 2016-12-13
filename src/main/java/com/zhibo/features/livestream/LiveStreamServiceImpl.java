@@ -65,12 +65,7 @@ public class LiveStreamServiceImpl implements LiveStreamService {
     }
 
     @Override
-    public void sendHeartbeat(String id) throws ZhiBoBaseException {
-        liveStreamDao.updateStatusAsOk(id);
-    }
-
-    @Override
-    public void close(String id) throws ZhiBoBaseException {
-        liveStreamDao.close(id);
+    public void modify(String id, LiveStreamModifyRequest modifyRequest) throws ZhiBoBaseException {
+        liveStreamDao.modify(id, modifyRequest);
     }
 }

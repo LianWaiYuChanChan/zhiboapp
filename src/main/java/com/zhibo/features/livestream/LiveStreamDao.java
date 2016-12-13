@@ -23,9 +23,9 @@ public interface LiveStreamDao {
     /**
      * Modify live stream according to the non-id properties of liveStream.
      *
-     * @param liveStream
+     * @param modifyRequest
      */
-    void modify(final LiveStream liveStream);
+    void modify(final String id, final LiveStreamModifyRequest modifyRequest)  throws ZhiBoBaseException;
 
     /**
      * Get live stream according to the id property of liveStream.
@@ -47,7 +47,4 @@ public interface LiveStreamDao {
 
     void deleteById(String id) throws ZhiBoBaseException;
 
-    void updateStatusAsOk(String id) throws ZhiBoBaseException;
-
-    void close(String id) throws ZhiBoBaseException;
 }

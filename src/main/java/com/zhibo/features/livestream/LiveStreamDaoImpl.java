@@ -35,8 +35,15 @@ public class LiveStreamDaoImpl implements LiveStreamDao {
     }
 
     @Override
-    public void modify(LiveStream liveStream) {
-
+    public void modify(final String id, final LiveStreamModifyRequest modifyRequest) throws ZhiBoBaseException {
+        LiveStream liveStream = getById(id);
+        liveStream.setStatus(modifyRequest.getStatus());
+        try {
+            entityManager.persist(liveStream);
+        } catch (Exception e) {
+            Logger.error("Internal Error in modify live steam for id = ." + id, e);
+            throw new InternalErrorException();
+        }
     }
 
     @Override
@@ -90,27 +97,4 @@ public class LiveStreamDaoImpl implements LiveStreamDao {
         }
     }
 
-    @Override
-    public void updateStatusAsOk(String id) throws ZhiBoBaseException {
-        LiveStream liveStream = getById(id);
-        liveStream.setStatus(LiveStreamStatusEnum.OK);
-        try {
-            entityManager.persist(liveStream);
-        } catch (Exception e) {
-            Logger.error("Internal Error in updateStatusAsOk live steam for id = ." + id, e);
-            throw new InternalErrorException();
-        }
-    }
-
-    @Override
-    public void close(String id) throws ZhiBoBaseException {
-        LiveStream liveStream = getById(id);
-        liveStream.setStatus(LiveStreamStatusEnum.CLOSED);
-        try {
-            entityManager.persist(liveStream);
-        } catch (Exception e) {
-            Logger.error("Internal Error in close live steam for id = ." + id, e);
-            throw new InternalErrorException();
-        }
-    }
 }

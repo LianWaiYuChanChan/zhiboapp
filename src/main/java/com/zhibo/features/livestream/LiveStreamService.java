@@ -18,7 +18,5 @@ interface LiveStreamService {
 
     void deleteById(String id) throws ZhiBoBaseException;
 
-    void sendHeartbeat(String id) throws ZhiBoBaseException;
-
-    void close(String id) throws ZhiBoBaseException;
+    void modify(String id, LiveStreamModifyRequest modifyRequest) throws ZhiBoBaseException;
 }
