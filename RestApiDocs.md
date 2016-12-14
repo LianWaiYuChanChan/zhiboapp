@@ -1,4 +1,5 @@
 ## livestream
+
 ### create livestream
    * Request:
     + Request method, url, headers
@@ -32,6 +33,7 @@
        "public": false
     }
    ```
+
 ### watch livestream
    * Request:
     + Request method, url, headers
@@ -44,6 +46,42 @@
    ```json
     {
     "liveStream":{"id":1}
+    }
+   ```
+   * Response:
+    + Response status: 204(No-Content)
+    + Response Body: NA
+
+### Update LiveStream status to OK
+   * Request:
+    + Request method, url, headers
+   ```javascript
+   HTTP Method: POST
+   URL: http://127.0.0.1:8080/zhiboapp/api/livestream/1/action/modify
+   Headers: Content-Type:application/json
+   ```
+    + Request body:
+   ```json
+    {
+        "status":"OK"
+    }
+   ```
+   * Response:
+    + Response status: 204(No-Content)
+    + Response Body: NA
+
+### Update LiveStream status to CLOSED
+   * Request:
+    + Request method, url, headers
+   ```javascript
+   HTTP Method: POST
+   URL: http://127.0.0.1:8080/zhiboapp/api/livestream/1/action/modify
+   Headers: Content-Type:application/json
+   ```
+    + Request body:
+   ```json
+    {
+        "status":"CLOSED"
     }
    ```
    * Response:
