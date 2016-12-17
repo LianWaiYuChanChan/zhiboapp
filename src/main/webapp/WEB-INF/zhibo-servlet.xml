@@ -33,9 +33,9 @@
     </bean>
 
     <bean id="kingSoftService" class="com.zhibo.kingsoft.KingSoftServiceImpl">
-        <property name="secretKey" value="Ik90eHJ6eElzZnBGakE3U3dQeklMd3k"/>
+        <property name="secretKey" value="TODO ReplaceItWithRealValueWhenDeploy"/>
+        <property name="accessKey" value="TODO ReplaceItWithRealValueWhenDeploy"/>
     </bean>
-
 
     <mvc:annotation-driven>
         <mvc:message-converters>

@@ -54,13 +54,17 @@ public class LiveStreamControllerTest {
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.name").value("aaa"))
                 .andReturn();
-        Integer id = JsonPath.read(result.getResponse().getContentAsString(), "$.id");
+        String respBodyCreateLiveStream = result.getResponse().getContentAsString();
+        Integer id = JsonPath.read(respBodyCreateLiveStream, "$.id");
+        String pushUrl = JsonPath.read(respBodyCreateLiveStream, "$.pushUrl");
+        //System.out.println(pushUrl);
 
         MvcResult resultCollectionQuery = this.mockMvc.perform(get("/api/livestream")
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8")).andReturn();
         String respCollectionQuery = resultCollectionQuery.getResponse().getContentAsString();
+        System.out.println(respCollectionQuery);
         assertTrue(0 < (Integer) JsonPath.read(respCollectionQuery, "$.resources.length()"));
 
         result = this.mockMvc.perform(get("/api/livestream/" + id)

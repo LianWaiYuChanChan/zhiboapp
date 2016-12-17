@@ -1,7 +1,5 @@
 package com.zhibo.kingsoft;
 
-import org.springframework.stereotype.Service;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
@@ -17,14 +15,28 @@ import java.util.Formatter;
 
 public class KingSoftServiceImpl implements KingSoftService {
 
-    private String secretKey;
-
-    public KingSoftServiceImpl(String secretKey) {
-        this.secretKey = secretKey;
-    }
     public KingSoftServiceImpl() {
     }
 
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
+    private String secretKey;
+
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
+    private String accessKey;
 
     public static String calculateRFC2104HMAC(String key, String data)
             throws SignatureException, NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException {
@@ -43,16 +55,17 @@ public class KingSoftServiceImpl implements KingSoftService {
         return formatter.toString();
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
-    @Override
-    public String computeSignature(Long expire, PushStreamResource pushStreamResource) throws Exception {
+    /**
+     * More details; https://v.ksyun.com/doc.html#/doc/livesdk.md
+     * Signature = Base64(HMAC-SHA1(SecretKey, UTF-8-Encoding-Of(StringToSign)))
+     * StringToSign:
+     * GET+”\n”+Expire+”\n”+Resource
+     * GET\n1436976000\nnonce=4e1f2519c626cbfbab1520c255830c26&vdoid=12345
+     * expire:签名的过期时间，Linux UTC标准时间戳，如1141889120，超过此时间的URL将无法使用
+     *
+     * @return
+     */
+    private String computeSignature(Long expire, PushStreamResource pushStreamResource) throws Exception {
         //GET\n1436976000\nnonce=4e1f2519c626cbfbab1520c255830c26&vdoid=12345
         String stringToSign = "GET\n" + expire + "\nnonce=" +
                 pushStreamResource.getNonce() + "&vdoid=" + pushStreamResource.getVdoid();
@@ -60,9 +73,7 @@ public class KingSoftServiceImpl implements KingSoftService {
     }
 
     @Override
-    public String constructPushUrl(String zhiboName, Long expire, String nonce, String vdoid,
-                                    String accessKey
-                                    ) throws Exception {
+    public String constructPushUrl(String zhiboName, Long expire, String nonce, String vdoid) throws Exception {
         //Exmaple: rtmp://***.uplive.ks-cdn.com/live/stream?signature=vU9XqPLcXd3nWdlfLWIhruZrLAM%3D
         // &accesskey=P3UPCMORAFON76Q6RTNQ
         // &expire=1436976000
@@ -71,16 +82,16 @@ public class KingSoftServiceImpl implements KingSoftService {
         PushStreamResource pushStreamResource = new PushStreamResource();
         pushStreamResource.setVdoid(vdoid);
         pushStreamResource.setNonce(nonce);
+        StringBuilder pushUrl = new StringBuilder();
+        pushUrl.append("rtmp://");
+        pushUrl.append(zhiboName);
+        pushUrl.append(".uplive.ks-cdn.com/live/stream?signature=");
+        pushUrl.append(computeSignature(expire, pushStreamResource));
+        pushUrl.append("&accessKey=").append(accessKey);
+        pushUrl.append("&expire=").append(expire);
+        pushUrl.append("&nonce=").append(nonce);
+        pushUrl.append("&vdoid=").append(vdoid);
+        return pushUrl.toString();
 
-        return "rtmp://" + zhiboName + ".uplive.ks-cdn.com/live/stream?signature="
-                + computeSignature(expire, pushStreamResource)
-                + "&accessKey="
-                + accessKey
-                + "&expire="
-                + expire
-                + "&nonce="
-                + nonce
-                + "&vdoid="
-                + vdoid;
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.List;
 
@@ -22,18 +24,25 @@ public class LiveStreamServiceImpl implements LiveStreamService {
     @Autowired
     private KingSoftService kingSoftService;
 
+    private SecureRandom random = new SecureRandom();
+
+    /**
+     * Temp solution.
+     * @return
+     */
+    private String generateNonce(){
+        return new BigInteger(130, random).toString(32);
+    }
+
     @Override
     public LiveStream pushStream(final LiveStreamPushRequest liveStreamPushRequest) throws ZhiBoBaseException {
-        //Interact with KingSoft cloud and get related into and persist them.
-
         String name = liveStreamPushRequest.getName();
         Long expire = Instant.now().getEpochSecond() + 5 * 60 * 60; //5 hours timeout
-        String nonce = "TODO";
+        String nonce = generateNonce();
         String vdoid = "123";
-        String accessKey = "aceesKeyValueFromWhere";
         String pushUrl = null;
         try {
-            pushUrl = kingSoftService.constructPushUrl(name, expire, nonce, vdoid, accessKey);
+            pushUrl = kingSoftService.constructPushUrl(name, expire, nonce, vdoid);
         } catch (Exception e) {
             Logger.error("Internal Error in calling kingSoftService.", e);
             throw new InternalErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error.");
